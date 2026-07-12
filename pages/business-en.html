@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRT - Business Areas</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;950&family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
+        :root {
+            --drt-accent: #234177; /* Signature Deep Blue */
+            --drt-bright: #3b82f6; /* Vivid Blue */
+            --drt-text-main: #1a1c21;
+            --drt-text-dim: #4b5563;
+            --drt-bg: #ffffff;
+            --drt-card-bg: #f8fafc;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background-color: var(--drt-bg);
+            color: var(--drt-text-main);
+        }
+
+        #business-areas-section {
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+            background-image: radial-gradient(rgba(35, 65, 119, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            width: 90%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Section Header */
+        .header-area {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .header-label {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--drt-bright);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .header-title {
+            font-size: 5.5rem;
+            font-weight: 950;
+            color: var(--drt-accent);
+            margin: 0;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+        }
+
+        .header-title span {
+            color: var(--drt-bright);
+        }
+
+        .header-desc {
+            font-size: 2rem;
+            color: var(--drt-text-dim);
+            margin-top: 40px;
+            font-weight: 500;
+            word-break: keep-all;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Business Grid */
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .business-card {
+            position: relative;
+            height: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .business-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 40px 80px rgba(35, 65, 119, 0.2);
+        }
+
+        /* Background Image Area */
+        .card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 1.2s ease;
+            z-index: 1;
+        }
+
+        .business-card:hover .card-bg {
+            transform: scale(1.1);
+        }
+
+        /* Dark Overlay */
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 2;
+            transition: opacity 0.6s ease;
+        }
+
+        .business-card:hover .card-overlay {
+            background: linear-gradient(to bottom, rgba(35, 65, 119, 0.4) 0%, rgba(10, 20, 40, 0.9) 100%);
+        }
+
+        /* Card Content */
+        .card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 50px;
+            box-sizing: border-box;
+            color: #fff;
+            z-index: 3;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .card-index {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--drt-bright);
+            margin-bottom: 15px;
+            display: block;
+            opacity: 0.8;
+        }
+
+        .card-title {
+            font-size: 3.5rem;
+            font-weight: 950;
+            margin: 0 0 25px 0;
+            line-height: 1.1;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .card-detail {
+            font-size: 1.6rem;
+            line-height: 1.6;
+            color: #ffffff;
+            font-weight: 500;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.6s ease;
+            margin-top: 0;
+        }
+
+        .business-card:hover .card-detail {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 20px;
+        }
+
+        .business-card:hover .card-content {
+            transform: translateY(-20px);
+        }
+
+        /* Tech Brackets (Same as consultation section for consistency) */
+        .business-card::before,
+        .business-card::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            z-index: 4;
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+
+        .business-card::before { top: 30px; left: 30px; border-right: none; border-bottom: none; }
+        .business-card::after { bottom: 30px; right: 30px; border-left: none; border-top: none; }
+
+        .business-card:hover::before,
+        .business-card:hover::after {
+            border-color: var(--drt-bright);
+            width: 45px;
+            height: 45px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .business-grid { grid-template-columns: 1fr; }
+            .business-card { height: 500px; }
+            .header-title { font-size: 2.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            #business-areas-section { padding: 80px 0; }
+            .header-title { font-size: 2.22rem; }
+            .card-title { font-size: 1.8rem; }
+            .card-content { padding: 30px; }
+        }
+
+        /* --- NEW: Technical Excellence Section --- */
+        #tech-excellence-section {
+            padding: 150px 0;
+            background-color: #0c121e;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .tech-visual {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+        }
+
+        .tech-visual img {
+            width: 100%;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+
+        .tech-visual:hover img { transform: scale(1.1); } /* 1.05 -> 1.1로 더 극적인 효과 */
+
+        /* 추가: 독자 설계 시스템 이미지 호버 효과 */
+        .visual-item {
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        .visual-item img {
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .visual-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .tech-text-area {
+            position: relative;
+            z-index: 5;
+        }
+
+        .tech-tag {
+            font-size: 1.4rem;
+            font-weight: 950;
+            color: var(--drt-bright);
+            letter-spacing: 0.3em;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .tech-title {
+            font-size: 4.2rem;
+            font-weight: 950;
+            line-height: 1.1;
+            margin-bottom: 50px;
+            letter-spacing: -0.02em;
+        }
+
+        .tech-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tech-item {
+            margin-bottom: 40px;
+            padding-left: 30px;
+            border-left: 3px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            border-left-color: var(--drt-bright);
+            background: rgba(59, 130, 246, 0.05);
+            padding-left: 40px;
+        }
+
+        .tech-item h4 {
+            font-size: 2.1rem;
+            font-weight: 950;
+            color: #fff;
+            margin: 0 0 15px 0;
+        }
+
+        .tech-item p {
+            font-size: 1.65rem; /* 1.5rem -> 1.65rem 상향 */
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* --- NEW: Imagine to Reality Section --- */
+        #custom-process-section {
+            padding: 150px 0;
+            background: #fff;
+            text-align: center;
+        }
+
+        .process-title-area {
+            margin-bottom: 100px;
+        }
+
+        .process-title-area h2 {
+            font-size: 4rem;
+            font-weight: 950;
+            color: var(--drt-accent);
+        }
+
+        .process-title-area p {
+            font-size: 1.6rem;
+            color: var(--drt-text-dim);
+            margin-top: 25px;
+        }
+
+        .process-visual-full {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 40px 100px rgba(35, 65, 119, 0.15);
+        }
+
+        .process-visual-full img {
+            width: 100%;
+            display: block;
+        }
+
+        .process-overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            color: #fff;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .process-overlay-text h3 {
+            font-size: 4.5rem;
+            font-weight: 950;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+            text-align: left;
+        }
+
+        .step-card {
+            padding: 40px;
+            background: var(--drt-card-bg);
+            border-radius: 16px;
+            border: 1px solid rgba(35, 65, 119, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .step-card:hover {
+            background: #fff;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            border-color: var(--drt-bright);
+        }
+
+        .step-num {
+            font-size: 1.4rem;
+            font-weight: 950;
+            color: var(--drt-bright);
+            margin-bottom: 25px;
+            display: block;
+            letter-spacing: 0.1em;
+        }
+
+        .step-name {
+            font-size: 2.1rem;
+            font-weight: 950;
+            margin-bottom: 20px;
+            color: var(--drt-accent);
+            line-height: 1.1;
+            min-height: 2.2em; /* 2줄 높이 고정으로 수직 정렬 맞춤 */
+            display: flex;
+            align-items: flex-end; /* 제목이 1줄일 때도 아래쪽에 붙여서 본문과 간격 유지 */
+        }
+
+        .step-desc {
+            font-size: 1.5rem; /* 본문 크기 추가 상향 */
+            color: var(--drt-text-dim);
+            line-height: 1.6;
+            word-break: keep-all;
+        }
+
+        @media (max-width: 1024px) {
+            .tech-grid { grid-template-columns: 1fr; gap: 50px; }
+            .process-steps { grid-template-columns: 1fr 1fr; }
+            .process-overlay-text h3 { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .process-steps { grid-template-columns: 1fr; }
+            .tech-title { font-size: 2.2rem; }
+            .process-title-area h2 { font-size: 2.5rem; }
+        }
+
+        /* --- Multi-Image Layout Styles --- */
+        .tech-visual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .visual-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .tech-visual-grid img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #1e293b;
+        }
+
+        .record-image-cluster {
+            position: relative;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding-bottom: 50px;
+        }
+
+        .record-img-main {
+            width: 75%;
+            z-index: 2;
+            border-radius: 8px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            border: 4px solid #fff;
+        }
+
+        .record-img-sub {
+            width: 50%;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: 3;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 4px solid #fff;
+            transform: rotate(3deg);
+        }
+
+        /* --- New Tech Scalability Section --- */
+        .vision-architecture-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            padding: 80px 60px;
+            background: #f8fafc;
+            border-radius: 30px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.05);
+        }
+
+        .architecture-title {
+            font-size: 4rem;
+            font-weight: 950;
+            margin-bottom: 30px;
+            color: var(--drt-accent);
+        }
+
+        .architecture-desc {
+            font-size: 1.7rem;
+            color: var(--drt-text-dim);
+            max-width: 900px;
+            margin: 0 auto 70px;
+            line-height: 1.6;
+        }
+
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .core-module {
+            background: var(--drt-accent);
+            color: #fff;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(35, 65, 119, 0.2);
+            text-align: center;
+        }
+
+        .core-module h3 { font-size: 2.8rem; margin-bottom: 15px; font-weight: 900; }
+        .core-module p { opacity: 0.9; font-size: 1.5rem; } /* 1.3rem -> 1.5rem 상향 */
+
+        .expansion-arrow {
+            font-size: 3rem;
+            color: var(--drt-bright);
+            animation: pulseHorizontal 2s infinite;
+        }
+
+        @keyframes pulseHorizontal {
+            0%, 100% { transform: translateX(0); opacity: 1; }
+            50% { transform: translateX(15px); opacity: 0.5; }
+        }
+
+        .expansion-targets {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .target-item {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .target-item:hover {
+            border-color: var(--drt-bright);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .target-icon { font-size: 3.5rem; }
+        .target-text h5 { margin: 0 0 5px 0; font-size: 1.9rem; color: var(--drt-accent); font-weight: 900; } /* 1.7rem -> 1.9rem 상향 */
+        .target-text p { margin: 0; font-size: 1.45rem; color: var(--drt-text-dim); } /* 1.3rem -> 1.45rem 상향 */
+
+        @media (max-width: 1024px) {
+            .architecture-grid { grid-template-columns: 1fr; gap: 30px; }
+            .expansion-arrow { transform: rotate(90deg); animation: pulseVertical 2s infinite; }
+            .record-image-cluster { margin-bottom: 60px; }
+        }
+
+        /* --- NEW: Proven Track Record Section --- */
+        #proven-track-record {
+            padding: 180px 0;
+            background-color: #f7f9fc;
+            position: relative;
+        }
+
+        .record-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .record-image-frame {
+            position: relative;
+            padding: 20px;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 40px 100px rgba(35, 65, 119, 0.1);
+            transform: rotate(-2deg);
+            border: 1px dashed #cbd5e1; /* 실제 사진 교체 안내를 위한 대시보드 */
+        }
+
+        .record-image-frame::before {
+            content: '실제 기체 비행 사진으로 교체 권장';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(35, 65, 119, 0.8);
+            color: #fff;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            z-index: 11;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .record-image-frame:hover::before {
+            opacity: 1;
+        }
+
+        .record-image-frame img {
+            width: 100%;
+            display: block;
+            border-radius: 2px;
+        }
+
+        .record-badge {
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            background: var(--drt-accent);
+            color: #fff;
+            padding: 25px;
+            border-radius: 50%;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-align: center;
+            line-height: 1.2;
+            box-shadow: 0 20px 40px rgba(35, 65, 119, 0.3);
+            z-index: 10;
+        }
+
+        .record-title {
+            font-size: 4.5rem;
+            font-weight: 950;
+            color: var(--drt-accent);
+            margin-bottom: 50px;
+            letter-spacing: -0.02em;
+        }
+
+        .record-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .stat-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            border-bottom: 4px solid var(--drt-bright);
+        }
+
+        .stat-box h5 {
+            font-size: 1.45rem; /* 1.3rem -> 1.4rem 상향 */
+            color: var(--drt-text-dim);
+            margin: 0 0 15px 0;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-box p {
+            font-size: 2.5rem; /* 2.22rem -> 2.5rem 대폭 상향 */
+            font-weight: 950;
+            color: var(--drt-accent);
+            margin: 0;
+            word-break: keep-all;
+            line-height: 1.2;
+        }
+
+        /* --- NEW: Total Unmanned Vision Section --- */
+        #total-vision-section {
+            padding: 180px 0;
+            background: linear-gradient(135deg, #0a0f1d 0%, #1e293b 100%);
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-header {
+            max-width: 900px;
+            margin: 0 auto 100px;
+        }
+
+        .vision-tag {
+            color: var(--drt-bright);
+            font-weight: 800;
+            letter-spacing: 0.3em;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .vision-header h2 {
+            font-size: 4.2rem;
+            font-weight: 950;
+            margin-bottom: 30px;
+        }
+
+        .vision-header p {
+            font-size: 1.85rem; /* 1.6rem -> 1.85rem 상향 */
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.7;
+            word-break: keep-all;
+        }
+
+        .vision-visual-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+        }
+
+        .vision-main-img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 100px 150px rgba(0,0,0,0.6);
+        }
+
+        .vision-platform-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .platform-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 50px 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            text-align: left;
+        }
+
+        .platform-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--drt-bright);
+            transform: translateY(-10px);
+        }
+
+        .platform-icon {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .platform-card h4 {
+            font-size: 1.9rem;
+            font-weight: 950;
+            margin-bottom: 15px;
+            color: var(--drt-bright);
+        }
+
+        .platform-card p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .record-grid { grid-template-columns: 1fr; gap: 60px; }
+            .vision-header h2 { font-size: 2.8rem; }
+            .vision-platform-grid { grid-template-columns: 1fr; }
+        }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
+    :root {
+        --consult-bg: #f8fafc;     /* White Gray (Cool Slate 50) for eye comfort */
+        --consult-accent: #234177; /* Brand Deep Blue */
+        --consult-bright: #3b82f6; /* Vivid Blue */
+        --consult-text: #1e293b;   /* Slate 800 */
+        --consult-sub: #64748b;    /* Slate 500 */
+        --consult-border: #cbd5e1; /* Slightly darker border for contrast */
+    }
+
+    #drt-consultation-section {
+        background: #f8fafc; /* White Gray (Solid) */
+        padding: 50px 20px; /* Reduced vertical size */
+        font-family: 'Inter', 'Noto Sans KR', sans-serif;
+        color: var(--consult-text);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none; /* Removed border for seamless blend */
+    }
+
+    /* PREMIUM GRID PATTERN (Subtle Tech Feel) */
+    #drt-consultation-section::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+            linear-gradient(rgba(35, 65, 119, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(35, 65, 119, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .consult-container {
+        max-width: 1200px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 5;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 60px 70px;
+        border-radius: 4px; /* Slightly sharper for tech feel */
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(20px);
+        /* Premium Diffuse Shadow */
+        box-shadow:
+            0 20px 40px -10px rgba(35, 65, 119, 0.1),
+            0 0 20px rgba(255, 255, 255, 0.8) inset;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* TECH CORNER BRACKETS (New Design Element) */
+    .consult-container::before,
+    .consult-container::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--consult-accent);
+        transition: all 0.3s ease;
+        opacity: 0.6;
+    }
+
+    /* Top-Left Bracket */
+    .consult-container::before {
+        top: -1px;
+        left: -1px;
+        border-right: none;
+        border-bottom: none;
+    }
+
+    /* Bottom-Right Bracket */
+    .consult-container::after {
+        bottom: -1px;
+        right: -1px;
+        border-left: none;
+        border-top: none;
+    }
+
+    /* Hover Effect: Brackets Expand */
+    .consult-container:hover::before {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+    .consult-container:hover::after {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+
+    /* Hover Lift Effect for Container */
+    .consult-container:hover {
+        transform: translateY(-2px);
+        box-shadow:
+            0 30px 60px -12px rgba(35, 65, 119, 0.15),
+            0 0 20px rgba(255, 255, 255, 0.8) inset;
+    }
+
+    /* Content Styling */
+    .consult-text {
+        max-width: 600px;
+    }
+
+    .consult-label {
+        color: var(--consult-bright);
+        font-size: 0.85rem;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Pulsing Dot Indicator */
+    .consult-label::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background-color: var(--consult-bright);
+        border-radius: 50%;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        animation: consult-pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes consult-pulse {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+        70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+
+    .consult-title {
+        font-size: 2.4rem;
+        font-weight: 800;
+        line-height: 1.25;
+        margin-bottom: 15px;
+        color: var(--consult-text);
+        letter-spacing: -0.02em;
+        word-break: keep-all; /* Prevent awkward word breaking (Korean) */
+    }
+
+    .consult-desc {
+        font-size: 1.15rem;
+        color: var(--consult-sub);
+        line-height: 1.6;
+        font-weight: 500;
+        word-break: keep-all; /* Prevent awkward word breaking (Korean) */
+    }
+
+    /* Button Area */
+    .consult-action {
+        flex-shrink: 0;
+    }
+
+    .consult-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 22px 55px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #ffffff !important; /* Force White Text */
+        text-decoration: none;
+        /* Gradient Background */
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        border-radius: 12px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        box-shadow: 0 10px 20px -5px rgba(30, 41, 59, 0.3);
+        z-index: 10;
+        white-space: nowrap; /* Keep button text on one line */
+    }
+
+    /* Shimmer Effect on Button */
+    .consult-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 200%;
+        height: 100%;
+        background: linear-gradient(
+            115deg,
+            transparent 0%,
+            transparent 40%,
+            rgba(255, 255, 255, 0.1) 45%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0.1) 55%,
+            transparent 60%,
+            transparent 100%
+        );
+        transition: transform 0.6s ease;
+        transform: translateX(0);
+        z-index: 1;
+    }
+
+    .consult-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 30px -10px rgba(30, 41, 59, 0.5);
+        background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+    }
+
+    .consult-btn:hover::before {
+        transform: translateX(50%);
+    }
+
+    .consult-btn span {
+        position: relative;
+        z-index: 2;
+    }
+
+    .consult-btn svg {
+        margin-left: 10px;
+        width: 20px;
+        height: 20px;
+        fill: #ffffff;
+        transition: transform 0.3s ease;
+        position: relative;
+        z-index: 2;
+    }
+
+    .consult-btn:hover svg {
+        transform: translateX(5px);
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 1024px) {
+        .consult-container {
+            flex-direction: column;
+            text-align: center;
+            padding: 50px 30px;
+            gap: 40px;
+        }
+
+        .consult-label {
+            justify-content: center;
+        }
+
+        .consult-text {
+            max-width: 100%;
+        }
+
+        .consult-title {
+            font-size: 2rem;
+        }
+
+        .consult-action {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .consult-btn {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px 30px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #drt-consultation-section {
+            padding: 60px 20px;
+        }
+
+        .consult-container {
+            padding: 40px 20px;
+        }
+
+        .consult-title {
+            font-size: 1.55rem; /* Adjusted for safe wrapping on small screens */
+        }
+
+        .consult-desc {
+            font-size: 1rem;
+        }
+    }
+</style>
+</head>
+<body>
+<section id="business-areas-section">
+        <div class="section-container">
+            <div class="header-area">
+                <span class="header-label">DRT CORE BUSINESS</span>
+                <h2 class="header-title">The Heart of <span>Unmanned Technology</span> Changing the World</h2>
+                <p class="header-desc">
+                    Beyond simple drone manufacturing, DRT integrates the hardware and software technologies the field demands<br>
+                    to deliver optimal, field-ready unmanned solutions.
+                </p>
+            </div>
+
+            <div class="business-grid">
+                
+                <div class="business-card">
+                    <div class="card-bg" style="background-image: url('https://cdn.imweb.me/upload/S202410091d710fdfb6029/efd11e339b17f.jpg');"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <span class="card-index">01</span>
+                        <h3 class="card-title">Hardware Development</h3>
+                        <p class="card-detail">
+                            From special-mission airframe design to core flight-control module development, we build industrial and military drone systems optimized for the field, backed by years of accumulated know-how.
+                        </p>
+                    </div>
+                </div>
+
+                
+                <div class="business-card">
+                    <div class="card-bg" style="background-image: url('https://cdn.imweb.me/upload/S202410091d710fdfb6029/f7f9a969e2696.jpg');"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <span class="card-index">02</span>
+                        <h3 class="card-title">GCS & System<br>Control Platform</h3>
+                        <p class="card-detail">
+                            From our own GCS 'DRTView' to deep customization of open-source GCS platforms, we develop diverse aircraft-control and integrated command software tailored to each purpose.
+                        </p>
+                    </div>
+                </div>
+
+                
+                <div class="business-card">
+                    <div class="card-bg" style="background-image: url('https://cdn.imweb.me/upload/S202410091d710fdfb6029/f60e3bf960086.jpg');"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <span class="card-index">03</span>
+                        <h3 class="card-title">Specialized<br>Field Solutions</h3>
+                        <p class="card-detail">
+                            We provide tailored special-purpose solutions for sites that are hard for humans to reach — high-rise facade cleaning, disaster-site reconnaissance, facility safety inspection, and more.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="tech-excellence-section">
+        <div class="section-container">
+            <div class="tech-grid">
+                <div class="tech-visual-grid">
+                    <div class="visual-item">
+                        <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/8ad47aecd668a.jpg" alt="PX4 Hardware Tech">
+                        <p style="color:rgba(255,255,255,0.5); font-size:0.8rem; margin-top:10px; text-align:center;">DRT proprietary system design</p>
+                    </div>
+                    <div class="visual-item">
+                        <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/f7f9a969e2696.jpg" alt="DRTView GCS Interface">
+                        <p style="color:rgba(255,255,255,0.5); font-size:0.8rem; margin-top:10px; text-align:center;">DRTView real-time ground control system</p>
+                    </div>
+                </div>
+                <div class="tech-text-area">
+                    <span class="tech-tag">DEEP TECH CAPABILITY</span>
+                    <h3 class="tech-title">Unrivaled Customization<br>Beyond Off-the-Shelf</h3>
+
+                    <div class="tech-list">
+                        <div class="tech-item">
+                            <h4>Advanced Firmware Optimization</h4>
+                            <p>We directly modify and develop the core logic of open-source stacks such as PX4 and ArduPilot, fully implementing the proprietary control algorithms and features that special missions require.</p>
+                        </div>
+                        <div class="tech-item">
+                            <h4>Tailor-made GCS System</h4>
+                            <p>From deep customization of existing GCS such as QGroundControl to building our own from scratch, we deliver UI/UX optimized for field workflows and powerful mission-management capabilities.</p>
+                        </div>
+                        <div class="tech-item">
+                            <h4>Bespoke Integration Engineering</h4>
+                            <p>More than assembling parts, DRT's integration engineering unlocks the full potential of hardware and software to turn every capability our customers imagine into reality.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="proven-track-record">
+        <div class="section-container">
+            <div class="record-grid">
+                <div class="record-image-cluster">
+                    <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/ea7853f3a6d95.jpg" alt="DRT Industrial Fleet" class="record-img-main">
+                    <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/4e4a33669ebdc.jpg" alt="DRT Defense Vision" class="record-img-sub">
+                    <div class="record-badge">PRIDE OF<br>DRT TECH</div>
+                </div>
+                <div class="record-text-area">
+                    <span class="header-label" style="text-align: left;">PROVEN TRACK RECORD</span>
+                    <h3 class="record-title">DRT Projects<br>Proven by Results</h3>
+
+                    <div class="record-stats" style="grid-template-columns: 1fr;">
+                        <div class="stat-box" style="margin-bottom: 20px;">
+                            <h5 style="color: var(--drt-bright); font-size: 1.6rem; margin-bottom: 5px;">NEXA Series</h5>
+                            <p style="font-size: 1.2rem; color: var(--drt-text-dim); font-weight: 500;">Facade cleaning and a range of industrial solution deployments</p>
+                        </div>
+                        <div class="stat-box">
+                            <h5 style="color: var(--drt-bright); font-size: 1.6rem; margin-bottom: 5px;">DRT-Q / DRT-T</h5>
+                            <p style="font-size: 1.2rem; color: var(--drt-text-dim); font-weight: 500;">Proven development for public-sector and defense unmanned systems</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="custom-process-section">
+        <div class="section-container">
+            <div class="process-title-area">
+                <h2>Imagine to Reality</h2>
+                <p>Every form of unmanned solution you can imagine becomes reality through DRT's engineering.</p>
+            </div>
+
+            <div class="process-visual-full">
+                <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/25f8a798a8aa3.jpg" alt="DRT Production Process">
+                <div class="process-overlay-text">
+                </div>
+            </div>
+
+            <div class="process-steps">
+                <div class="step-card">
+                    <span class="step-num">STEP 01</span>
+                    <h4 class="step-name">Concept Planning</h4>
+                    <p class="step-desc">We analyze your ideas and mission requirements to design an optimized airframe configuration and solution.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">STEP 02</span>
+                    <h4 class="step-name">Firmware Development</h4>
+                    <p class="step-desc">With our in-house software expertise, we implement everything from manual control of special functions to fully autonomous flight.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">STEP 03</span>
+                    <h4 class="step-name">Rapid Prototyping</h4>
+                    <p class="step-desc">Through composite-material structural design and precision machining, we turn imagined designs into field-ready products.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">STEP 04</span>
+                    <h4 class="step-name">Full Integration</h4>
+                    <p class="step-desc">We unify hardware, firmware, and software into a business model ready for immediate field deployment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="total-vision-section">
+        <div class="section-container">
+            <div class="vision-architecture-container">
+                <span class="vision-tag" style="color: var(--drt-bright);">TECHNOLOGY SCALABILITY</span>
+                <h2 class="architecture-title">Universal Scalability of Unmanned Technology</h2>
+                <p class="architecture-desc">
+                    DRT's proprietary control logic and command software are built on a flexible architecture that reaches beyond the sky — instantly applicable to every unmanned vehicle on land and water. We focus not on the form of a 'drone,' but on the 'technology' itself that reduces the loss of human life.
+                </p>
+
+                <div class="architecture-grid">
+                    <div class="core-module">
+                        <h3>DRT Core Engine</h3>
+                        <p>Firmware Logic + GCS Stack</p>
+                    </div>
+                    <div class="expansion-arrow">→</div>
+                    <div class="expansion-targets">
+                        <div class="target-item">
+                            <span class="target-icon">🛸</span>
+                            <div class="target-text">
+                                <h5>Aerial Drone (UAV)</h5>
+                                <p>Vertical expansion from high-altitude surveillance to special-mission execution</p>
+                            </div>
+                        </div>
+                        <div class="target-item">
+                            <span class="target-icon">🚛</span>
+                            <div class="target-text">
+                                <h5>Unmanned Ground Vehicle (UGV)</h5>
+                                <p>A range of autonomous ground-rover systems</p>
+                            </div>
+                        </div>
+                        <div class="target-item">
+                            <span class="target-icon">🚤</span>
+                            <div class="target-text">
+                                <h5>Unmanned Surface Vessel (USV)</h5>
+                                <p>Intelligent platforms for underwater exploration and maritime security</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="drt-consultation-section">
+    <div class="consult-container">
+        
+        <div class="consult-text">
+            <div class="consult-label">ENTERPRISE SOLUTION</div>
+            <h2 class="consult-title">Need an Optimized<br>Drone Solution?</h2>
+            <p class="consult-desc">
+                From drone development to deployment, we solve the A to Z of your business.<br>
+                Our specialists provide systematic consulting to map out your optimal adoption roadmap.
+            </p>
+        </div>
+        
+        <div class="consult-action">
+            <a href="/contact" class="consult-btn">
+                <span>Request a Consultation</span>
+                <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+</body>
+</html>
