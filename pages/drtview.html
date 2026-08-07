@@ -329,12 +329,16 @@
                             <h4 style="color: #fff; margin-bottom:12px; font-size:2.1rem;">📢 지능형 음성 비서 (TTS)</h4>
                             <p style="font-size:1.45rem; color:var(--text-dim); line-height:1.7;">조종사가 화면을 계속 주시할 수 없는 현장 상황을 고려했습니다. 중요한 정보는 모두 음성으로 안내하여 안전사고를 최소화합니다.</p>
                         </div>
+                        <div class="divider">
+                            <h4 style="color: #fff; margin-bottom:12px; font-size:2.1rem;">⚖️ 추진 하중 감시</h4>
+                            <p style="font-size:1.45rem; color:var(--text-dim); line-height:1.7;">비행 중 추력 데이터로 기체 총중량을 실시간 추정합니다. 공식 추진표 기준을 초과하면 경고와 함께 하강을 권고해 무리한 운용을 막습니다.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="image-stack reveal delay-2">
-                    <!-- [이미지 삽입: 5방향 레이더 시각화 UI 스크린샷] -->
+                    <!-- [이미지 삽입: 전방 거리 리본·레이더 오버레이 실화면] -->
                     <div class="stack-item" style="top: 0; left: 0; width: 90%; z-index: 1;">
-                        <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/bf1c28174bf27.jpg" alt="Radar Display">
+                        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_field.png" alt="Obstacle Overlay">
                     </div>
                     <!-- [이미지 삽입: 안전 경고 팝업 또는 에러 알림 화면] -->
                     <div class="stack-item" style="bottom: 20px; right: 0; width: 80%; z-index: 2;">
@@ -352,9 +356,9 @@
                     <div class="stack-item" style="top: 0; right: 0; width: 80%; z-index: 1; transform: rotate(1deg);">
                         <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/1b4758697f16e.jpg" alt="VAB Mode">
                     </div>
-                    <!-- [이미지 삽입: 원격 업데이트(OTA) 완료 또는 진행 화면] -->
+                    <!-- [이미지 삽입: 앱 업데이트 팝업 실화면] -->
                     <div class="stack-item" style="top: 180px; left: 0; width: 75%; z-index: 2; transform: rotate(-3deg);">
-                        <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/755829ac4c65b.jpg" alt="OTA Update">
+                        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/update_popup.png" alt="OTA Update">
                     </div>
                     <!-- [이미지 삽입: 도시 환경 비행 화면] -->
                     <div class="stack-item" style="bottom: 20px; right: -20px; width: 70%; z-index: 3; transform: rotate(4deg);">
@@ -402,13 +406,28 @@
                     <div class="tech-box">
                         <p style="color:var(--text-dim); font-size:1.45rem !important; line-height:1.8;">
                             📍 실시간 좌표 및 비행 궤적(Breadcrumbs) 자동 기록<br>
-                            ⚠️ 공역 진입 시 즉각적인 경보 및 시동 전 경고<br>
+                            🗺️ 비행금지·관제권 등 공역을 지도 위에 색으로 표시<br>
+                            ⚠️ 공역을 길게 누르면 구역 이름과 등급을 즉시 확인<br>
                             💾 인터넷 없이도 유지되는 오프라인 지도 데이터
                         </p>
                     </div>
                 </div>
                 <!-- [이미지 삽입: 구글 맵 기반 비행 궤적 및 지도 화면] -->
                 <div class="image-frame reveal delay-1"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/map_main.png" alt=""></div> </div>
+
+            <!-- 공역 시각화 — 표시와 상세 확인 두 장면 -->
+            <div class="grid-2 reveal delay-2" style="margin-top:60px;">
+                <div>
+                    <!-- [이미지 삽입: 공역이 색으로 표시된 지도 화면] -->
+                    <div class="image-frame"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/map_airspace.png" alt="Airspace Overlay"></div>
+                    <p style="color:var(--text-dim); font-size:1.15rem; margin-top:18px; text-align:center;">비행금지구역은 지도 위에 색으로 즉시 구분됩니다.</p>
+                </div>
+                <div>
+                    <!-- [이미지 삽입: 공역 길게 눌러 구역 정보 확인] -->
+                    <div class="image-frame"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/map_airspace_popup.png" alt="Airspace Detail"></div>
+                    <p style="color:var(--text-dim); font-size:1.15rem; margin-top:18px; text-align:center;">길게 누르면 구역 이름과 등급까지 바로 확인됩니다.</p>
+                </div>
+            </div>
         </section>
 
         <!-- [SECTOR 7] LANGUAGES & GLOBAL -->
@@ -445,7 +464,7 @@
             <div class="responsive-grid grid-1-2 reveal grid-reverse-mobile" style="align-items: center;">
                 <!-- [이미지 삽입: 안드로이드 태블릿에서의 파라미터 튜닝 화면] -->
                 <div class="image-frame reveal">
-                    <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/vehicle_easy_setup.png" alt="Parameter Tuning">
+                    <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/params_list.png" alt="Parameter Tuning">
                 </div>
                 <div class="reveal">
                     <span class="section-tag">ADVANCED CONFIG</span>
@@ -493,7 +512,7 @@
                     </div>
                     <div class="info-card reveal delay-2" style="text-align:center;">
                         <h5 style="color:var(--primary); font-size:1.7rem; margin-bottom:20px; font-weight:800;">STANDARD FC</h5>
-                        <p style="color:var(--text-dim); font-size:1.15rem;"><span class="keep-all">PX4 v1.14+ / Pixhawk</span><br class="br-pc"><span class="keep-all">범용 FC 완벽 지원</span></p>
+                        <p style="color:var(--text-dim); font-size:1.15rem;"><span class="keep-all">PX4 v1.14+ / Pixhawk 범용 FC와</span><br class="br-pc"><span class="keep-all">USB·UDP·TCP·Bluetooth 다중 연결 지원</span></p>
                     </div>
                     <div class="info-card reveal delay-3" style="text-align:center;">
                         <h5 style="color:var(--primary); font-size:1.7rem; margin-bottom:20px; font-weight:800;">SMART CONTROLLER</h5>
@@ -509,7 +528,7 @@
     <section style="background: radial-gradient(circle at center, #1a2332 0%, #000 100%); text-align: center; padding: 250px 0; border: none;">
         <div class="container reveal">
             <h2 class="section-title"><span class="keep-all">드론 관제의 미래,</span><br class="br-pc"><span class="keep-all" style="color:var(--primary)">지금 DRTView로 업그레이드 하세요</span></h2>
-            <a href="https://drive.google.com/file/d/109r3oLq0TNN_9GMAGF5UD72T1A6Ar0IU/view?usp=sharing" class="btn btn-blue">DOWNLOAD</a>
+            <a href="https://www.drtdrone.io/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=170704954&t=board" class="btn btn-blue">DOWNLOAD</a>
         </div>
     </section>
 
