@@ -1,556 +1,378 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRTView - 조종사를 위한 가장 스마트한 비행 파트너</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Outfit:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <style>
-        /* [CORE BRANDING] */
-        #drt-premium-promo {
-            --primary: #2196F3;
-            --primary-glow: rgba(33, 150, 243, 0.6);
-            --accent: #00E676;
-            --warning: #FFC107;
-            --danger: #FF5252;
-            --bg: #0A0E14;
-            --surface: #161B22;
-            --surface-light: #1E2530;
-            --text: #FFFFFF;
-            --text-dim: #A0AEC0;
-            --border: rgba(255, 255, 255, 0.1);
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRTView — DRT Ground Control Station</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============ DRTView 소개 v4 — cinematic minimal ============ */
+#dv26 {
+    --bg: #0A0C10;
+    --ink: #EDF1F6;
+    --dim: #93A0B0;
+    --dim-strong: #C4CDD8;
+    --line: rgba(255,255,255,0.09);
+    --accent: #2E9BFF;
+    --danger: #FF5252;
 
-            background-color: var(--bg) !important;
-            color: var(--text) !important;
-            font-family: 'Inter', 'Noto Sans KR', sans-serif !important;
-            line-height: 1.8 !important;
-            overflow-x: hidden !important;
-            word-break: keep-all !important;
-            word-wrap: break-word !important;
-        }
+    background: var(--bg) !important;
+    color: var(--ink) !important;
+    font-family: 'Outfit', 'Noto Sans KR', sans-serif !important;
+    line-height: 1.8 !important;
+    word-break: keep-all !important;
+    overflow-x: hidden !important;
+}
+#dv26 *, #dv26 *::before, #dv26 *::after { box-sizing: border-box !important; margin: 0; padding: 0; }
+#dv26 img { max-width: 100%; }
+#dv26 a { text-decoration: none !important; }
 
-        .br-pc { display: inline !important; }
-        @media (max-width: 850px) {
-            .br-pc { display: none !important; }
-        }
+.dv-container { max-width: 1320px !important; margin: 0 auto !important; padding: 0 56px !important; }
 
-        /* [PHRASE GROUPING] */
-        .keep-all { display: inline-block !important; word-break: keep-all !important; vertical-align: top; }
+.br-pc { display: inline !important; }
+@media (max-width: 900px) { .br-pc { display: none !important; } }
 
-        #drt-premium-promo *, #drt-premium-promo *::before, #drt-premium-promo *::after {
-            box-sizing: border-box !important; margin: 0; padding: 0;
-        }
+/* reveal */
+#dv26 .rv { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s cubic-bezier(.22,.61,.36,1); }
+#dv26 .rv.on { opacity: 1; transform: translateY(0); }
+#dv26 .rv-d1 { transition-delay: .12s; }
+#dv26 .rv-d2 { transition-delay: .24s; }
 
-        .container { max-width: 1400px !important; margin: 0 auto !important; padding: 0 60px !important; }
-        section { padding: 180px 0 !important; border-bottom: 1px solid var(--border) !important; }
+/* ============ HERO ============ */
+.dv-hero { position: relative; min-height: 100vh; display: flex !important; flex-direction: column; overflow: hidden; background: var(--bg); }
+.dv-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+.dv-hero-scrim { position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,12,16,.66) 0%, rgba(10,12,16,.28) 36%, rgba(10,12,16,.55) 68%, rgba(9,11,14,.96) 100%); }
+.dv-hero-top { position: relative; padding: 52px 0 0 !important; text-align: center; }
+.dv-hero-top img { height: 46px; }
+.dv-hero-body { position: relative; margin-top: auto !important; width: 100%; padding-bottom: 140px !important; }
+.dv-eyebrow { display: block !important; font-family: 'Outfit', sans-serif; color: var(--accent) !important; font-weight: 700 !important; font-size: .92rem !important; letter-spacing: .3em !important; margin-bottom: 26px !important; text-transform: uppercase; }
+.dv-h1 { font-size: clamp(2.6rem, 6vw, 5.3rem) !important; font-weight: 800 !important; line-height: 1.12 !important; letter-spacing: -0.03em !important; color: var(--ink) !important; margin-bottom: 30px !important; }
+.dv-hero-sub { color: rgba(237,241,246,.85) !important; font-size: 1.24rem !important; line-height: 1.85 !important; max-width: 680px; margin-bottom: 46px !important; }
+.dv-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.dv-btn { display: inline-block !important; padding: 17px 46px !important; border-radius: 10px !important; font-weight: 800 !important; font-size: 1rem !important; letter-spacing: .12em !important; cursor: pointer; transition: .25s ease; }
+.dv-btn-solid { background: var(--accent) !important; color: #fff !important; }
+.dv-btn-solid:hover { background: #55AFFF !important; transform: translateY(-2px); }
+.dv-btn-ghost { border: 1px solid rgba(255,255,255,.34) !important; color: var(--ink) !important; background: rgba(10,12,16,.38) !important; letter-spacing: .04em !important; }
+.dv-btn-ghost:hover { border-color: rgba(255,255,255,.7) !important; }
+.dv-scrollcue { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.dv-scrollcue span { font-size: .7rem; letter-spacing: .34em; color: var(--dim); font-family: 'Outfit', sans-serif; font-weight: 600; }
+.dv-scrollcue i { display: block; width: 1px; height: 52px; background: linear-gradient(180deg, var(--accent), transparent); animation: dvcue 2s ease-in-out infinite; }
+@keyframes dvcue { 0% { transform: scaleY(0); transform-origin: top; } 45% { transform: scaleY(1); transform-origin: top; } 55% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
-        /* [STAGGERED REVEAL] */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .delay-1 { transition-delay: 0.1s; }
-        .delay-2 { transition-delay: 0.25s; }
-        .delay-3 { transition-delay: 0.4s; }
+/* ============ FACT STRIP ============ */
+.dv-strip { border-top: 1px solid var(--line) !important; border-bottom: 1px solid var(--line) !important; background: rgba(255,255,255,.015) !important; }
+.dv-strip-grid { display: grid !important; grid-template-columns: repeat(4, 1fr); }
+.dv-strip-grid > div { padding: 36px 30px !important; border-left: 1px solid var(--line); }
+.dv-strip-grid > div:first-child { border-left: 0; }
+.dv-strip-grid b { display: block !important; font-family: 'Outfit', 'Noto Sans KR', sans-serif; font-size: 1.72rem !important; font-weight: 700 !important; color: var(--ink) !important; line-height: 1.3 !important; margin-bottom: 4px !important; }
+.dv-strip-grid span { color: var(--dim) !important; font-size: .86rem !important; letter-spacing: .12em !important; }
 
-        /* [HERO DESIGN - HUD STYLE] */
-        .hero {
-            height: 100vh;
-            min-height: 1000px; /* Prevent overlap on short desktop windows */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle at 50% 50%, #162130 0%, #0A0E14 100%);
-            position: relative;
-            text-align: center;
-        }
-        #drt-premium-promo .hero-hud-frame { position: relative; padding: 100px 150px !important; display: inline-block; }
-        #drt-premium-promo .corner { position: absolute; width: 45px; height: 45px; border: 2.5px solid rgba(33, 150, 243, 0.45) !important; pointer-events: none; }
-        #drt-premium-promo .corner.tl { top: -40px; left: -80px; border-right: 0 !important; border-bottom: 0 !important; }
-        #drt-premium-promo .corner.tr { top: -40px; right: -80px; border-left: 0 !important; border-bottom: 0 !important; }
-        #drt-premium-promo .corner.bl { bottom: -40px; left: -80px; border-right: 0 !important; border-top: 0 !important; }
-        #drt-premium-promo .corner.br { bottom: -40px; right: -80px; border-left: 0 !important; border-top: 0 !important; }
+/* ============ SECTIONS ============ */
+#dv26 .dv-sec { padding: 148px 0 !important; border-top: 1px solid var(--line) !important; background: transparent !important; }
+#dv26 .dv-sec:first-of-type { border-top: 0 !important; }
+.dv-index { font-family: 'Outfit', sans-serif; color: var(--accent) !important; font-weight: 700 !important; letter-spacing: .3em !important; font-size: .84rem !important; margin-bottom: 30px !important; text-transform: uppercase; }
+.dv-title { font-size: clamp(2.1rem, 3.8vw, 3.4rem) !important; font-weight: 800 !important; line-height: 1.22 !important; letter-spacing: -0.02em !important; color: var(--ink) !important; margin-bottom: 30px !important; }
+.dv-desc { color: var(--dim) !important; font-size: 1.22rem !important; line-height: 1.9 !important; max-width: 840px; margin-bottom: 60px !important; }
+.dv-desc strong { color: var(--dim-strong) !important; font-weight: 700 !important; }
 
-        .header-logo { height: 50px; margin-bottom: 50px; }
-        .hero-title { font-size: clamp(2.5rem, 7vw, 5.5rem) !important; line-height: 1.1; margin-bottom: 40px !important; letter-spacing: -0.04em !important; font-weight: 900; }
-        .hero-subtitle { font-size: 1.6rem; max-width: 900px; color: var(--text-dim); margin: 0 auto; line-height: 1.6; }
+/* screenshots */
+.dv-shot { border-radius: 14px !important; overflow: hidden !important; border: 1px solid var(--line) !important; background: #000 !important; box-shadow: 0 28px 70px rgba(0,0,0,.5); }
+.dv-shot img { width: 100% !important; display: block !important; }
+.dv-shot.crop-l { aspect-ratio: 1.545; }
+.dv-shot.crop-l img { width: 100% !important; height: 100% !important; object-fit: cover; object-position: 100% 50%; }
+.dv-shot.crop-g { aspect-ratio: 2 / 1; }
+.dv-shot.crop-g img { width: 100% !important; height: 100% !important; object-fit: cover; object-position: top; }
+.dv-cap { margin-top: 16px !important; color: var(--dim) !important; font-size: .95rem !important; line-height: 1.6 !important; }
+.dv-cap::before { content: "—  "; color: var(--accent); font-weight: 700; }
 
-        /* 스크롤 애니메이션 위치 고정 (겹침 방지) */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 60px; /* Raised from 30px */
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            opacity: 0.85;
-            z-index: 10;
-        }
-        @media (max-width: 850px) {
-            .scroll-indicator { bottom: 80px; } /* Slightly higher on mobile */
-        }
-        .mouse { width: 22px; height: 36px; border: 2px solid var(--primary); border-radius: 12px; position: relative; box-shadow: 0 0 15px rgba(33, 150, 243, 0.3); }
-        .wheel { width: 4px; height: 8px; background: #FFF; border-radius: 2px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); animation: scroll 2s infinite; box-shadow: 0 0 10px #FFF; }
-        @keyframes scroll { 0% { opacity: 1; transform: translateX(-50%) translateY(0); } 100% { opacity: 0; transform: translateX(-50%) translateY(12px); } }
+.dv-pair { display: grid !important; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 44px !important; }
+.dv-cols { display: grid !important; grid-template-columns: 1fr 1.12fr; gap: 72px; align-items: start; }
+.dv-stack > div + div { margin-top: 36px !important; }
 
-        /* [UI ELEMENTS] */
-        .section-tag { color: var(--primary) !important; font-weight: 900 !important; letter-spacing: 0.3em !important; font-size: 1rem !important; margin-bottom: 25px !important; display: block !important; text-transform: uppercase; }
-        .section-title { font-size: clamp(2.5rem, 5vw, 4.2rem) !important; line-height: 1.2 !important; margin-bottom: 45px !important; font-family: 'Outfit', sans-serif; font-weight: 800; }
-        .section-desc { font-size: 1.45rem !important; color: var(--text-dim) !important; margin-bottom: 80px !important; max-width: 1000px; word-break: keep-all; }
+/* feature rows — 카드 대신 헤어라인 행 */
+.dv-rows { border-top: 1px solid var(--line) !important; }
+.dv-row { display: grid !important; grid-template-columns: 215px 1fr; gap: 28px; padding: 27px 0 !important; border-bottom: 1px solid var(--line) !important; }
+.dv-row b { color: var(--ink) !important; font-size: 1.1rem !important; font-weight: 700 !important; line-height: 1.6 !important; }
+.dv-row p { color: var(--dim) !important; font-size: 1.08rem !important; line-height: 1.8 !important; }
 
-        .image-frame { border-radius: 30px !important; border: 1px solid var(--border) !important; overflow: hidden !important; background: #000; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
-        .image-frame img { width: 100% !important; display: block !important; }
+/* full-width band */
+.dv-band { position: relative; overflow: hidden; background: #000 !important; }
+.dv-band > img { width: 100% !important; height: 74vh; min-height: 440px; object-fit: cover; display: block !important; }
+.dv-band-scrim { position: absolute; inset: 0; background: rgba(6,8,11,.64); }
+.dv-band-txt { position: absolute; inset: 0; display: flex !important; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 28px !important; }
+.dv-band-txt h2 { font-size: clamp(1.7rem, 3vw, 2.7rem) !important; font-weight: 800 !important; line-height: 1.4 !important; letter-spacing: -0.015em !important; color: var(--ink) !important; max-width: 900px; }
+.dv-band-txt .dv-eyebrow { margin-bottom: 20px !important; }
+.dv-band-txt .dv-note { margin-top: 26px !important; color: rgba(237,241,246,.72) !important; font-size: 1.05rem !important; }
 
-        .info-card { background: var(--surface) !important; padding: 60px 45px !important; border-radius: 24px !important; border: 1px solid var(--border) !important; transition: 0.3s ease; text-align: center; }
-        .info-card:hover { border-color: var(--primary) !important; box-shadow: 0 0 40px var(--primary-glow); }
-        .info-card i { font-size: 3.5rem; display: block; margin-bottom: 30px; color: var(--primary); }
-        .info-card h3 { font-size: 2.1rem !important; margin-bottom: 25px !important; color: #fff; text-align: center; }
-        .info-card p { font-size: 1.45rem !important; color: var(--text-dim); text-align: center; line-height: 1.7; }
+/* ecosystem columns */
+.dv-eco { display: grid !important; grid-template-columns: repeat(3, 1fr); margin-top: 64px !important; }
+.dv-eco > div { padding: 10px 40px 10px 30px !important; border-left: 1px solid var(--line); }
+.dv-eco > div:first-child { border-left: 0; padding-left: 0 !important; }
+.dv-eco h5 { font-family: 'Outfit', sans-serif; color: var(--accent) !important; font-size: .95rem !important; font-weight: 700 !important; letter-spacing: .22em !important; margin-bottom: 16px !important; text-transform: uppercase; }
+.dv-eco p { color: var(--dim) !important; font-size: 1.08rem !important; line-height: 1.8 !important; }
+.dv-lang { margin-top: 64px !important; padding-top: 30px !important; border-top: 1px solid var(--line) !important; color: var(--dim) !important; font-size: 1.08rem !important; }
+.dv-lang b { color: var(--ink) !important; font-weight: 700 !important; }
 
-        .tech-box { background: var(--surface-light) !important; padding: 45px !important; border-radius: 20px !important; border: 1px solid var(--border) !important; transition: 0.3s ease; }
-        .tech-box:hover { border-color: var(--primary) !important; box-shadow: 0 0 40px var(--primary-glow); }
+/* footer */
+.dv-footer { padding: 100px 0 !important; background: #06080B !important; text-align: center; border-top: 1px solid var(--line) !important; }
+.dv-footer p { color: #5A6472 !important; font-size: 1rem !important; max-width: 760px; margin: 0 auto !important; line-height: 1.9 !important; }
 
-        /* [CTA BUTTON] */
-        .btn { padding: 25px 90px !important; border-radius: 15px !important; font-size: 1.5rem !important; font-weight: 800 !important; text-decoration: none !important; display: inline-block !important; cursor: pointer; border: none; }
-        .btn-blue { background-color: var(--primary) !important; color: #FFFFFF !important; box-shadow: 0 15px 35px rgba(33, 150, 243, 0.4), 0 0 25px var(--primary-glow); transition: 0.4s ease; }
-        .btn-blue:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 45px rgba(33, 150, 243, 0.5), 0 0 35px var(--primary-glow); }
-
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
-        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
-        .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
-
-        /* [MISSION CARDS - SHARED] */
-        .mission-card { background: var(--surface) !important; padding: 60px 50px !important; border-radius: 24px !important; border: 1px solid var(--border) !important; transition: 0.3s ease; width: 100%; }
-        .mission-card:hover { border-color: var(--primary) !important; box-shadow: 0 0 40px var(--primary-glow); }
-        .mission-card h4 { font-size: 2.1rem !important; margin-bottom: 25px !important; color: #fff; }
-        .mission-card p { font-size: 1.45rem !important; color: var(--text-dim) !important; line-height: 1.7 !important; }
-
-        #drt-premium-promo .divider { border-top: 1px solid var(--border) !important; padding-top: 60px !important; margin-top: 40px !important; display: block !important; }
-        #drt-premium-promo .tech-box h4, #drt-premium-promo .mission-card h4 { margin-top: 0 !important; margin-bottom: 25px !important; }
-        .tech-box p, .mission-card p { margin-bottom: 0 !important; }
-
-        /* [ADVANCED IMAGE STYLING] */
-        .image-stack { position: relative; height: 500px; width: 100%; }
-        .stack-item { position: absolute; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 40px 80px rgba(0,0,0,0.8); transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
-        .stack-item:hover { transform: translateY(-15px) scale(1.03); z-index: 10 !important; border-color: var(--primary) !important; }
-        .stack-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-        /* [LAYOUT UTILS] */
-        .row-reverse { flex-direction: row-reverse !important; }
-        .grid-reverse { direction: rtl; }
-        .grid-reverse > * { direction: ltr; }
-
-        /* [RESPONSIVE] */
-        .responsive-grid { display: grid !important; gap: 60px; }
-        .grid-2-1 { grid-template-columns: 1fr 1.2fr !important; }
-        .grid-1-2 { grid-template-columns: 1.2fr 1fr !important; }
-
-        @media (max-width: 1100px) {
-            .grid-3, .grid-2 { grid-template-columns: 1fr; }
-            .grid-2-1, .grid-1-2 { grid-template-columns: 1fr !important; gap: 60px !important; }
-        }
-        @media (max-width: 850px) {
-            section { padding: 100px 0 !important; }
-            .feature-grid { grid-template-columns: 1fr; gap: 20px; }
-            .container { padding: 0 25px !important; }
-            .section-title { font-size: 2.2rem !important; margin-bottom: 30px !important; }
-            .section-desc { font-size: 1.15rem !important; margin-bottom: 50px !important; }
-
-            #drt-premium-promo .hero { padding-top: 140px !important; padding-bottom: 180px !important; height: auto !important; min-height: 100vh !important; display: block !important; }
-            #drt-premium-promo .hero-hud-frame { padding: 40px 20px !important; width: 100% !important; }
-            #drt-premium-promo .corner { width: 25px; height: 25px; }
-            #drt-premium-promo .corner.tl, #drt-premium-promo .corner.tr { top: -20px; }
-            #drt-premium-promo .corner.bl, #drt-premium-promo .corner.br { bottom: -20px; }
-            #drt-premium-promo .corner.tl, #drt-premium-promo .corner.bl { left: -10px; }
-            #drt-premium-promo .corner.tr, #drt-premium-promo .corner.br { right: -10px; }
-            .header-logo { height: 40px !important; margin-bottom: 30px !important; }
-            .hero-title { font-size: 2.1rem !important; word-break: keep-all; }
-            .hero-subtitle { font-size: 1.05rem !important; padding-bottom: 100px; }
-            /* indicator position handled globally with absolute */
-
-            .image-stack { height: 350px !important; margin-top: 30px !important; width: 100% !important; }
-            .grid-1-1-mobile { grid-template-columns: 1fr !important; gap: 40px !important; }
-
-            .grid-reverse-mobile { display: flex !important; flex-direction: column-reverse !important; }
-            .info-card { padding: 40px 20px !important; }
-            .info-card h3 { font-size: 1.5rem !important; }
-            .tech-box { padding: 25px !important; }
-            .tech-box h4 { font-size: 1.4rem !important; }
-            .mission-card { padding: 40px 25px !important; }
-            /* 섹션 7 카드 텍스트 줄바꿈 방지 */
-            #languages .info-card { padding: 0 !important; width: 100% !important; min-height: 250px !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; }
-            #languages .info-card h3 { white-space: nowrap !important; font-size: 1.35rem !important; margin-bottom: 0 !important; }
-            #languages .info-card img { width: 52px !important; height: 34px !important; object-fit: cover; } /* 모바일 국기 크기 통일 */
-            #languages .flag-container { gap: 10px !important; margin-bottom: 20px !important; }
-        }
-    </style>
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1000px) {
+    .dv-container { padding: 0 24px !important; }
+    #dv26 .dv-sec { padding: 92px 0 !important; }
+    .dv-hero-body { padding-bottom: 110px !important; }
+    .dv-hero-sub { font-size: 1.06rem !important; }
+    .dv-strip-grid { grid-template-columns: 1fr 1fr; }
+    .dv-strip-grid > div { padding: 26px 22px !important; }
+    .dv-strip-grid > div:nth-child(3) { border-left: 0; }
+    .dv-strip-grid > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .dv-cols, .dv-pair { grid-template-columns: 1fr; gap: 36px; }
+    .dv-row { grid-template-columns: 1fr; gap: 8px; padding: 22px 0 !important; }
+    .dv-desc { font-size: 1.1rem !important; margin-bottom: 44px !important; }
+    .dv-eco { grid-template-columns: 1fr; margin-top: 44px !important; }
+    .dv-eco > div { border-left: 0; border-top: 1px solid var(--line); padding: 26px 0 !important; }
+    .dv-eco > div:first-child { border-top: 0; padding-top: 0 !important; }
+    .dv-band > img { height: 60vh; }
+    .dv-eyebrow { font-size: .76rem !important; letter-spacing: .2em !important; }
+    #dv-05 .dv-stack { order: 2; }
+}
+</style>
 </head>
 <body>
 
-<div id="drt-premium-promo">
+<div id="dv26">
 
-    <!-- [SECTOR 1] HERO SECTION -->
-    <header class="hero">
-        <div class="container">
-            <div class="reveal active">
-                <!-- [이미지 삽입: 브랜드 로고 (중앙 상단)] -->
-                <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/2e4159a01e616.png" alt="" class="header-logo" style="display: block; margin: 0 auto 50px auto; height: 60px;">
-
-                <div class="hero-hud-frame">
-                    <span class="corner tl"></span><span class="corner tr"></span>
-                    <span class="corner bl"></span><span class="corner br"></span>
-                    <span style="color:var(--primary); font-weight:900; letter-spacing:0.3em; display:block; margin-bottom:25px;">BEYOND THE LIMITS</span>
-                    <h1 class="hero-title"><span class="keep-all">단순한 조종의 한계를 넘어,</span><br class="br-pc"><span class="keep-all" style="color:var(--primary)">비행의 모든 순간을 지배하다</span></h1>
-                    <p class="hero-subtitle">
-                        <span class="keep-all">드론의 데이터와 조종사의 직관을 잇는</span> <span class="keep-all">가장 정밀한 인터페이스.</span><br class="br-pc">
-                        <span class="keep-all"><strong>DRTView</strong>는 안전한 비행과 완벽한 임무수행을 위한</span> <span class="keep-all">지능형 관제 비서입니다.</span>
-                    </p>
-                </div>
+    <!-- HERO -->
+    <header class="dv-hero">
+        <img class="dv-hero-bg" src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_hero_tower.png" alt="">
+        <div class="dv-hero-scrim"></div>
+        <div class="dv-hero-top">
+            <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/2e4159a01e616.png" alt="DRTView">
+        </div>
+        <div class="dv-container dv-hero-body">
+            <span class="dv-eyebrow">DRT Ground Control Station</span>
+            <h1 class="dv-h1">비행의 모든 순간을,<br>한 화면에</h1>
+            <p class="dv-hero-sub">드론 제조사 DRT가 처음부터 새로 설계한 관제 소프트웨어입니다. <br class="br-pc">이륙 전 점검부터 착륙 후 기록까지, 조종사에게 필요한 것만 정확한 자리에 놓입니다.</p>
+            <div class="dv-actions">
+                <a class="dv-btn dv-btn-solid" href="https://www.drtdrone.io/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=170704954&t=board">DOWNLOAD</a>
+                <a class="dv-btn dv-btn-ghost" href="#dv-01">기능 살펴보기</a>
             </div>
         </div>
-
-        <div class="scroll-indicator">
-            <div class="mouse"><div class="wheel"></div></div>
-            <span style="font-size:0.75rem; letter-spacing:0.25em; color:var(--text-dim); margin-top:10px;">SCROLL TO EXPLORE</span>
-        </div>
+        <div class="dv-scrollcue"><span>SCROLL</span><i></i></div>
     </header>
 
-    <div class="container">
-
-        <!-- [SECTOR 2] INDEPENDENT ARCHITECTURE -->
-        <section id="pure-tech">
-            <div class="reveal">
-                <span class="section-tag">INDEPENDENT ARCHITECTURE</span>
-                <h2 class="section-title"><span class="keep-all">범용 GCS의 한계를 넘어서는</span><br class="br-pc"><span class="keep-all" style="color:var(--primary)">자체개발 고성능 아키텍처</span></h2>
-                <p class="section-desc">
-                    기존 오픈소스 기반 GCS와는 다르게 무거운 범용 로직을 덜어내고, 오직 드론 실무에 최적화된 독자적 아키텍처를 설계했습니다.<br>
-                    불필요한 오버헤드를 제거하여 압도적인 시스템 안정성과 타협하지 않는 반응 속도를 구현했습니다.
-                </p>
-            </div>
-            <div class="feature-grid">
-                <div class="info-card reveal delay-1">
-                    <i>🛠️</i>
-                    <h4>맞춤형 시스템 구조</h4><br>
-                    <p style="color:var(--text-dim); font-size:1.15rem;">복잡하고 거대한 범용 프레임워크 대신, 핵심 데이터 처리에 집중한 자체 엔진을 통해 어플리케이션 성능을 극대화했습니다.</p>
-                </div>
-                <div class="info-card reveal delay-2">
-                    <i>🎨</i>
-                    <h4>차세대 UI 엔진</h4><br>
-                    <p style="color:var(--text-dim); font-size:1.15rem;"><span class="keep-all">실무에 최적화 된 전용 UI 엔진은</span><br class="br-pc"><span class="keep-all">기체로부터 넘어오는 방대한 데이터를</span> <span class="keep-all">지연 없이 시각화하여</span><br class="br-pc"><span class="keep-all">선명한 비행 경험을 제공합니다.</span></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- [SECTOR 2.5] SMART LAUNCHER -->
-        <section id="launcher">
-            <div class="responsive-grid reveal grid-1-1-mobile" style="grid-template-columns: 1.3fr 1fr; gap: 70px; align-items: center;">
-                <div class="image-stack reveal delay-1" style="height: 560px;">
-                    <!-- [이미지 삽입: 런처 홈 화면 (기체 배경 + 준비 패널)] -->
-                    <div class="stack-item" style="top: 0; left: 0; width: 88%; z-index: 1;">
-                        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/home_launcher.png" alt="Launcher Home">
-                    </div>
-                    <!-- [이미지 삽입: 내장 사용 설명 (시동 절차)] -->
-                    <div class="stack-item" style="bottom: 0; right: 0; width: 72%; z-index: 2;">
-                        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/guide_arming.png" alt="Built-in Guide">
-                    </div>
-                </div>
-                <div class="reveal">
-                    <span class="section-tag">SMART LAUNCHER</span>
-                    <h2 class="section-title"><span class="keep-all">전원을 켜는 순간,</span><br class="br-pc"><span class="keep-all" style="color:var(--primary)">임무가 시작되는 홈</span></h2>
-                    <p class="section-desc" style="margin-bottom: 50px !important;">
-                        <span class="keep-all">DRTView는 전용 조종기의 시작 화면 그 자체입니다.</span><br class="br-pc">
-                        <span class="keep-all">전원을 켜면 기체·영상·조종 신호의 준비 상태가</span> <span class="keep-all">한 화면에 정리되고,</span><br class="br-pc">
-                        <span class="keep-all">확인이 끝나면 버튼 하나로 비행 화면에 진입합니다.</span>
-                    </p>
-                    <div class="tech-box">
-                        <p style="color:var(--text-dim); font-size:1.45rem !important; line-height:1.8;">
-                            ✅ 기체·영상·조종 신호 준비 상태를 홈에서 한눈에<br>
-                            📖 시동 절차부터 경고 대응까지, 내장 사용 설명 제공<br>
-                            🚀 설치된 앱·기기 설정까지 이어지는 단일 동선
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- [SECTOR 3] HUD & VIDEO -->
-        <section id="hud-video">
-            <div class="reveal">
-                <span class="section-tag">HUD & VIDEO</span>
-                <h2 class="section-title">직관적으로 설계된 HUD와<br>지연 없는 고해상도 영상</h2>
-                <p class="section-desc">
-                    기체 상태를 0.1초 단위로 동기화하는 디지털 트윈 기술로, 지연 시간을 획기적으로 단축하여 비행에 완벽하게 몰입할 수 있는 환경을 제공합니다.
-                </p>
-            </div>
-            <div class="grid-2">
-                <div class="info-card">
-                    <i style="color: #2196F3;">🖥️</i>
-                    <h3>직관적인 HUD 대시보드</h3>
-                    <p><span class="keep-all">전문가가 아니어도 괜찮습니다.</span><br class="br-pc">
-                    <span class="keep-all">기체의 상태, 배터리, 고도 등</span> <span class="keep-all" style="white-space:nowrap;">다양한 정보를</span><br class="br-pc"> <span class="keep-all" style="white-space:nowrap;">직관적인 디자인으로</span> <span class="keep-all">설계하여</span><br class="br-pc"> <span class="keep-all">조종사가 오직 비행에만 집중할 수 있게 돕습니다.</span>
-                </p>
-                </div>
-                <div class="info-card">
-                    <i style="color: #00E676;">⚡</i>
-                    <h3>끊김 없는 고화질 라이브 스트리밍</h3>
-                    <p><span class="keep-all">DRT만의 특별한 기술력으로</span><br class="br-pc"><span class="keep-all">생생한 고화질 영상을 지연 없이 전달합니다.</span><br class="br-pc"><span class="keep-all">짐벌 및 카메라 조작까지 모두 OK</span></p>
-                </div>
-            </div>
-            <!-- [이미지 삽입: HUD가 적용된 실시간 비행 메인 화면] -->
-            <div class="image-frame reveal delay-1" style="margin-top:60px;">
-                <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_hero_tower.png" alt=""> </div>
-        </section>
-
-        <!-- [SECTOR 4] SAFETY SENTINEL -->
-        <section id="safety">
-            <div class="reveal">
-                <span class="section-tag">INTELLIGENT SAFETY SENTINEL</span>
-                <h2 class="section-title">시각과 청각을 동시에,<br><span style="color:var(--danger)">지능형 통합 안전 시스템</span></h2>
-                <p class="section-desc">
-                    완벽한 센서 데이터 통합으로 비행 경로상의 장애물을 실시간으로 감시합니다.<br>지능형 음성 비서는 위급 상황 발생 시 조종사의 빠른 대응을 돕는 든든한 조력자가 되어줍니다.
-                </p>
-            </div>
-            <div class="responsive-grid reveal grid-1-1-mobile" style="grid-template-columns: 1fr 1.3fr; gap: 70px; align-items: flex-start;">
-                <div class="reveal delay-1">
-                    <div class="tech-box" style="text-align: left;">
-                        <div>
-                            <h4 style="color: #fff; margin-bottom:12px; font-size:2.1rem;">📡 정밀 센서 데이터 오버레이</h4>
-                            <p style="font-size:1.45rem; color:var(--text-dim); line-height:1.7;">비행경로상에 감지되는 모든 장애물의 거리를 HUD에 시각화하여 사각지대 없는 비행 환경을 제공합니다.</p>
-                        </div>
-                        <div class="divider">
-                            <h4 style="color: #fff; margin-bottom:12px; font-size:2.1rem;">⚠️ 능동형 사고 방지 알림</h4>
-                            <p style="font-size:1.45rem; color:var(--text-dim); line-height:1.7;">위험 구역 진입, 기체 이상 발생등 다양한 정보를 팝업 메시지로 나타내어 조종사의 빠른 대응을 돕습니다.</p>
-                        </div>
-                        <div class="divider">
-                            <h4 style="color: #fff; margin-bottom:12px; font-size:2.1rem;">📢 지능형 음성 비서 (TTS)</h4>
-                            <p style="font-size:1.45rem; color:var(--text-dim); line-height:1.7;">조종사가 화면을 계속 주시할 수 없는 현장 상황을 고려했습니다. 중요한 정보는 모두 음성으로 안내하여 안전사고를 최소화합니다.</p>
-                        </div>
-                        <div class="divider">
-                            <h4 style="color: #fff; margin-bottom:12px; font-size:2.1rem;">⚖️ 추진 하중 감시</h4>
-                            <p style="font-size:1.45rem; color:var(--text-dim); line-height:1.7;">비행 중 추력 데이터로 기체 총중량을 실시간 추정합니다. 공식 추진표 기준을 초과하면 경고와 함께 하강을 권고해 무리한 운용을 막습니다.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="image-stack reveal delay-2">
-                    <!-- [이미지 삽입: 전방 거리 리본·레이더 오버레이 실화면] -->
-                    <div class="stack-item" style="top: 0; left: 0; width: 90%; z-index: 1;">
-                        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_field.png" alt="Obstacle Overlay">
-                    </div>
-                    <!-- [이미지 삽입: 안전 경고 팝업 또는 에러 알림 화면] -->
-                    <div class="stack-item" style="bottom: 20px; right: 0; width: 80%; z-index: 2;">
-                        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_warning_popup.png" alt="Active Warning">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- [SECTOR 5] MISSION TOOLS -->
-        <section id="mission-tools">
-            <div class="responsive-grid grid-1-2 reveal" style="align-items: center;">
-                <div class="image-stack reveal" style="height: 600px;">
-                    <!-- [이미지 삽입: VAB 모드 및 3D AR 가이드 화면] -->
-                    <div class="stack-item" style="top: 0; right: 0; width: 80%; z-index: 1; transform: rotate(1deg);">
-                        <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/1b4758697f16e.jpg" alt="VAB Mode">
-                    </div>
-                    <!-- [이미지 삽입: 앱 업데이트 팝업 실화면] -->
-                    <div class="stack-item" style="top: 180px; left: 0; width: 75%; z-index: 2; transform: rotate(-3deg);">
-                        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/update_popup.png" alt="OTA Update">
-                    </div>
-                    <!-- [이미지 삽입: 도시 환경 비행 화면] -->
-                    <div class="stack-item" style="bottom: 20px; right: -20px; width: 70%; z-index: 3; transform: rotate(4deg);">
-                        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_city.png" alt="Mission Flight">
-                    </div>
-                </div>
-                <div class="feature-text">
-                    <span class="section-tag">MISSION TOOLS</span>
-                    <h2 class="section-title"><span class="keep-all">경험으로 완성된</span><br class="br-pc"><span class="keep-all">실무 특화 기능들</span></h2>
-                    <p class="section-desc" style="font-size: 1.4rem !important;">실제 현장에서의 다양한 경험을 통해 완성된<br>완벽한 임무수행을 위한 전용 도구들입니다.</p>
-
-                    <div class="mission-container">
-                        <div class="mission-card" style="text-align: left;">
-                            <div>
-                                <h4 style="color: #00E676 !important; margin-bottom:15px;">🏗️ 반자동 청소 가이드 (AR 오버레이)</h4>
-                                <p>건물 청소를 위해 설계된 DRT사 NEXA1 기체만의 특별한 기능, 반자동 청소 기능을 가이드하는 AR 시스템입니다. 가상의 작업 경로를 화면에 투영하여 작업의 정확성을 비약적으로 높입니다.</p>
-                            </div>
-
-                            <div class="divider">
-                                <h4 style="color: #2196F3 !important; margin-bottom:15px;">📢 들리는 관제 (TTS 지능형 비서)</h4>
-                                <p>배터리 잔량, 고도 경고, 미션 상태 등 비행 중 필수 정보를 실시간 한국어/영어 음성으로 안내합니다.</p>
-                            </div>
-
-                            <div class="divider">
-                                <h4 style="color: #FFC107 !important; margin-bottom:15px;">🔄 원격 무선 업데이트 (OTA)</h4>
-                                <p>앱은 물론 기체 파라미터·펌웨어까지, 인터넷 연결만으로 전 세계 어디서나 최신 상태를 유지합니다. 멈추지 않는 진화를 경험하세요.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- [SECTOR 6] MAPPING & TRACKING -->
-        <section id="mapping">
-            <div class="responsive-grid reveal grid-1-1-mobile" style="grid-template-columns: 1fr 1.3fr; align-items: center;">
-                <div class="reveal">
-                    <span class="section-tag">MAPPING & TRACKING</span>
-                    <h2 class="section-title"><span class="keep-all">정밀 지도 정보와</span><br class="br-pc"><span class="keep-all">실시간 비행 궤적의 통합</span></h2>
-                    <p class="section-desc">
-                        <span class="keep-all">구글 지도 위에 실시간 위치와 지나온 경로를 기록합니다.</span><br class="br-pc">
-                        <span class="keep-all">또한 지능형 공역 감시를 통해 비행 금지 구역 진입 시</span><br class="br-pc">
-                        <span class="keep-all">팝업메시지와 경고음성으로 조종사를 위법 행위로부터 보호합니다.</span>
-                    </p>
-                    <div class="tech-box">
-                        <p style="color:var(--text-dim); font-size:1.45rem !important; line-height:1.8;">
-                            📍 실시간 좌표 및 비행 궤적(Breadcrumbs) 자동 기록<br>
-                            🗺️ 비행금지·관제권 등 공역을 지도 위에 색으로 표시<br>
-                            ⚠️ 공역을 길게 누르면 구역 이름과 등급을 즉시 확인<br>
-                            💾 인터넷 없이도 유지되는 오프라인 지도 데이터
-                        </p>
-                    </div>
-                </div>
-                <!-- [이미지 삽입: 구글 맵 기반 비행 궤적 및 지도 화면] -->
-                <div class="image-frame reveal delay-1"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/map_main.png" alt=""></div> </div>
-
-            <!-- 공역 시각화 — 표시와 상세 확인 두 장면 -->
-            <div class="grid-2 reveal delay-2" style="margin-top:60px;">
-                <div>
-                    <!-- [이미지 삽입: 공역이 색으로 표시된 지도 화면] -->
-                    <div class="image-frame"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/map_airspace.png" alt="Airspace Overlay"></div>
-                    <p style="color:var(--text-dim); font-size:1.15rem; margin-top:18px; text-align:center;">비행금지구역은 지도 위에 색으로 즉시 구분됩니다.</p>
-                </div>
-                <div>
-                    <!-- [이미지 삽입: 공역 길게 눌러 구역 정보 확인] -->
-                    <div class="image-frame"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/map_airspace_popup.png" alt="Airspace Detail"></div>
-                    <p style="color:var(--text-dim); font-size:1.15rem; margin-top:18px; text-align:center;">길게 누르면 구역 이름과 등급까지 바로 확인됩니다.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- [SECTOR 7] LANGUAGES & GLOBAL -->
-        <section id="languages" style="text-align: center;">
-            <div class="reveal">
-                <span class="section-tag">GLOBAL SCALABILITY</span>
-                <h2 class="section-title"><span class="keep-all">전 세계 어디서나,</span><br class="br-pc"><span class="keep-all" style="color:var(--accent)">무한한 언어 확장성</span></h2>
-                <p class="section-desc" style="margin: 0 auto 80px auto;">
-                    한국어·영어·일본어를 완벽하게 지원하며, 전 세계 어떤 언어로든 신속하게 대응할 수 있는 아키텍처를 갖췄습니다.<br>독자 개발 앱이기에 가능한 빠르고 유연한 파트너십을 지원합니다.
-                </p>
-            </div>
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 40px;" class="reveal delay-1">
-                <div style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;">
-                    <div class="info-card" style="padding:0 !important; display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:320px; min-height:300px;">
-                        <div class="flag-container" style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:25px; white-space:nowrap;">
-                            <img src="https://flagcdn.com/w160/kr.png" alt="KR" style="width:64px; height:42px; object-fit:cover; border-radius:4px; box-shadow:0 5px 15px rgba(0,0,0,0.4);">
-                            <span style="font-size:1.5rem; color:var(--text-dim); opacity:0.5; margin: 0 5px;">/</span>
-                            <img src="https://flagcdn.com/w160/us.png" alt="US" style="width:64px; height:42px; object-fit:cover; border-radius:4px; box-shadow:0 5px 15px rgba(0,0,0,0.4);">
-                            <span style="font-size:1.5rem; color:var(--text-dim); opacity:0.5; margin: 0 5px;">/</span>
-                            <img src="https://flagcdn.com/w160/jp.png" alt="JP" style="width:64px; height:42px; object-fit:cover; border-radius:4px; box-shadow:0 5px 15px rgba(0,0,0,0.4);">
-                        </div>
-                        <h3 style="margin-bottom:0 !important;">한/영/일 완벽 대응</h3>
-                    </div>
-                    <div class="info-card" style="padding:0 !important; display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:320px; min-height:300px;">
-                        <span style="font-size:4rem; display:block; margin-bottom:20px; filter: drop-shadow(0 0 15px rgba(0, 230, 118, 0.4));">🌍</span>
-                        <h3 style="margin-bottom:0 !important;">무한 확장 설계</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- [SECTOR 8] ADVANCED CONFIG (SETTINGS) -->
-        <section id="settings">
-            <div class="responsive-grid grid-1-2 reveal grid-reverse-mobile" style="align-items: center;">
-                <!-- [이미지 삽입: 안드로이드 태블릿에서의 파라미터 튜닝 화면] -->
-                <div class="image-frame reveal">
-                    <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/params_list.png" alt="Parameter Tuning">
-                </div>
-                <div class="reveal">
-                    <span class="section-tag">ADVANCED CONFIG</span>
-                    <h2 class="section-title"><span class="keep-all">전문가를 위한</span><br class="br-pc"><span class="keep-all">세밀한 기체 최적화</span></h2>
-                    <p class="section-desc">
-                        1,000개 이상의 파라미터 설정을 통해 기체 특성을 완벽히 제어합니다. 데이터 손실 없는 전용 패치 기술로 안전한 튜닝 환경을 보장합니다.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- [SECTOR 9] SECURITY & RECORD -->
-        <section id="security">
-            <div class="reveal">
-                <span class="section-tag">RECORD & SECURITY</span>
-                <h2 class="section-title"><span class="keep-all">비행의 모든 순간을</span><br class="br-pc"><span class="keep-all">가장 안전하게.</span></h2>
-            </div>
-            <div class="feature-grid">
-                <div class="info-card reveal delay-1">
-                    <i>📸</i>
-                    <h4>통합 데이터 기록</h4><br>
-                    <p style="color:var(--text-dim); font-size:1.15rem;"><span class="keep-all">비행 화면의 원터치 녹화로 현장 영상과</span><br class="br-pc"><span class="keep-all">실시간 텔레메트리 데이터를 함께 기록하며</span><br class="br-pc"><span class="keep-all">유사 시 블랙박스 역할을 수행합니다.</span></p>
-                </div>
-                <div class="info-card reveal delay-2">
-                    <i>🔐</i>
-                    <h4>보안 이벤트 로그</h4><br>
-                    <p style="color:var(--text-dim); font-size:1.15rem;"><span class="keep-all">모든 데이터는</span> <span class="keep-all">DRT만의</span> <span class="keep-all" style="white-space:nowrap;">특별한 기술을 통해</span><br class="br-pc"><span class="keep-all">암호화되어 관리되며</span> <span class="keep-all">강력한 보안을 유지합니다.</span></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- [SECTOR 10] COMPATIBILITY & ECOSYSTEM -->
-        <section id="compatibility">
-            <div class="reveal">
-                <span class="section-tag">HARDWARE ECOSYSTEM</span>
-                <h2 class="section-title"><span class="keep-all">DRT 기체 완전 최적화 &amp;</span><br class="br-pc"><span class="keep-all" style="color:var(--primary)">글로벌 표준 하드웨어 지원</span></h2>
-                <p class="section-desc">
-                    DRTView는 자사 전용 기체의 성능을 100% 발휘하도록 설계되었습니다.<br>동시에 표준 MAVLink 프로토콜을 사용하는 다양한 글로벌 장비들과도 완벽히 호환됩니다.
-                </p>
-
-                <div class="grid-3" style="margin-top:80px;">
-                    <div class="info-card reveal delay-1" style="text-align:center;">
-                        <h5 style="color:var(--primary); font-size:1.7rem; margin-bottom:20px; font-weight:800;">DRT NATIVE SYNC</h5>
-                        <p style="color:var(--text-dim); font-size:1.15rem;"><span class="keep-all">전용 하드웨어 및</span><br class="br-pc"><span class="keep-all">미션 기능 완벽 연동</span></p>
-                    </div>
-                    <div class="info-card reveal delay-2" style="text-align:center;">
-                        <h5 style="color:var(--primary); font-size:1.7rem; margin-bottom:20px; font-weight:800;">STANDARD FC</h5>
-                        <p style="color:var(--text-dim); font-size:1.15rem;"><span class="keep-all">PX4 v1.14+ / Pixhawk 범용 FC와</span><br class="br-pc"><span class="keep-all">USB·UDP·TCP·Bluetooth 다중 연결 지원</span></p>
-                    </div>
-                    <div class="info-card reveal delay-3" style="text-align:center;">
-                        <h5 style="color:var(--primary); font-size:1.7rem; margin-bottom:20px; font-weight:800;">SMART CONTROLLER</h5>
-                        <p style="color:var(--text-dim); font-size:1.15rem;"><span class="keep-all">MK15 / MK32등 안드로이드</span><br class="br-pc"><span class="keep-all">하드웨어 지원</span></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+    <!-- FACT STRIP -->
+    <div class="dv-strip">
+        <div class="dv-container dv-strip-grid">
+            <div><b>0.1초</b><span>텔레메트리 동기</span></div>
+            <div><b>1,000+</b><span>제어 파라미터</span></div>
+            <div><b>한 · 영 · 일</b><span>지원 언어</span></div>
+            <div><b>4가지 연결</b><span>USB · UDP · TCP · Bluetooth</span></div>
+        </div>
     </div>
 
-    <!-- [SECTOR 11] FINAL CTA -->
-    <section style="background: radial-gradient(circle at center, #1a2332 0%, #000 100%); text-align: center; padding: 250px 0; border: none;">
-        <div class="container reveal">
-            <h2 class="section-title"><span class="keep-all">드론 관제의 미래,</span><br class="br-pc"><span class="keep-all" style="color:var(--primary)">지금 DRTView로 업그레이드 하세요</span></h2>
-            <a href="https://www.drtdrone.io/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=170704954&t=board" class="btn btn-blue">DOWNLOAD</a>
+    <!-- 01 SMART LAUNCHER -->
+    <section class="dv-sec" id="dv-01">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">01 — Smart Launcher</div>
+                <h2 class="dv-title">전원을 켜면,<br>준비가 시작됩니다</h2>
+                <p class="dv-desc">DRTView는 전용 조종기의 <strong>시작 화면</strong>입니다. 기체 연결과 영상 수신, 배터리·위성 상태가 홈 한 화면에 정리되고, 이륙 전 점검을 통과하면 버튼 하나로 비행 화면에 들어갑니다.</p>
+            </div>
+            <div class="dv-shot rv rv-d1"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/home_launcher.png" alt="DRTView 홈 화면"></div>
+            <div class="dv-pair rv rv-d2">
+                <div>
+                    <div class="dv-shot crop-g"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/guide_arming.png" alt="내장 사용 설명 — 시동 절차"></div>
+                    <p class="dv-cap">내장 사용 설명 — 시동 절차부터 경고 대응까지 조종기 안에서 바로 확인합니다.</p>
+                </div>
+                <div>
+                    <div class="dv-shot crop-g"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/guide_screen.png" alt="비행 화면 구성 안내"></div>
+                    <p class="dv-cap">비행 화면 구성 — 궁금한 요소를 눌러 배우는 화면별 안내를 제공합니다.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- [SECTOR 12] FOOTER -->
-    <footer style="padding: 120px 0; background: #05070a; text-align: center; border-top: 1px solid var(--border);">
-        <div class="container">
-            <!-- [이미지 삽입: 서비스 로고] -->
-            <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/074b45295de6b.png" alt="" class="footer-logo" style="margin-bottom: 40px;"> <p style="color:#555; font-size:1.15rem; max-width: 800px; margin: 0 auto;">
-                &copy; 2026 DRT Co., Ltd. All rights reserved. <br>
-                본 페이지에 기재된 모든 아키텍처 정보와 솔루션은 (주)디알티의 지적 재산입니다.
-            </p>
+    <!-- 02 FLIGHT HUD -->
+    <section class="dv-sec" id="dv-02">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">02 — Flight HUD &amp; Video</div>
+                <h2 class="dv-title">영상 위에는<br>필요한 정보만</h2>
+                <p class="dv-desc">자체 개발 영상 파이프라인이 <strong>고해상도 영상을 지연 없이</strong> 그립니다. 고도·비행 시간·배터리·추력은 화면 가장자리에 정돈되고, 조종사의 시선은 기체에서 떠나지 않습니다. 짐벌과 카메라 조작도 같은 화면에서 이뤄집니다.</p>
+            </div>
+            <div class="dv-shot rv rv-d1"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_lake.png" alt="실시간 비행 HUD"></div>
+            <p class="dv-cap rv rv-d2">실시간 HUD — 전방 장애물 거리 리본, 지도 PIP, 비행 데이터가 영상 위에 함께 놓입니다.</p>
+        </div>
+    </section>
+
+    <!-- 03 SAFETY -->
+    <section class="dv-sec" id="dv-03">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">03 — Safety</div>
+                <h2 class="dv-title">위험은 화면과 소리로<br>먼저 도착합니다</h2>
+            </div>
+            <div class="dv-cols" style="margin-top:56px;">
+                <div class="dv-rows rv rv-d1">
+                    <div class="dv-row"><b>장애물 거리 표시</b><p>기체가 감지한 장애물까지의 거리를 방향별 리본으로 영상 위에 그립니다.</p></div>
+                    <div class="dv-row"><b>경고 팝업</b><p>위험 구역 진입, 기체 이상, 운용 한계 초과를 화면 중앙에 즉시 띄웁니다.</p></div>
+                    <div class="dv-row"><b>음성 안내</b><p>화면을 볼 수 없는 순간에도 중요한 변화를 음성으로 알립니다. 한국어·영어를 지원합니다.</p></div>
+                    <div class="dv-row"><b>추진 하중 감시</b><p>추력 데이터로 기체 총중량을 실시간 추정하고, 공식 추진표 범위를 넘으면 하강을 권고합니다.</p></div>
+                </div>
+                <div class="dv-stack rv rv-d2">
+                    <div>
+                        <div class="dv-shot"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_field.png" alt="장애물 거리 리본"></div>
+                        <p class="dv-cap">전방 장애물 거리 리본과 방향 레이더</p>
+                    </div>
+                    <div>
+                        <div class="dv-shot"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_warning_popup.png" alt="하강 권고 경고 팝업"></div>
+                        <p class="dv-cap">추진표 기준 초과 — 하강 권고 팝업</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04 MAP & AIRSPACE -->
+    <section class="dv-sec" id="dv-04">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">04 — Map &amp; Airspace</div>
+                <h2 class="dv-title">궤적과 공역이<br>한 지도 위에</h2>
+                <p class="dv-desc">실시간 위치와 지나온 경로가 지도에 그대로 남습니다. 비행금지·관제권 공역은 <strong>색으로 구분</strong>되고, 길게 누르면 구역 이름과 등급이 열립니다. 지도 데이터는 오프라인에서도 유지됩니다.</p>
+            </div>
+            <div class="dv-shot crop-l rv rv-d1"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/map_main.png" alt="비행 궤적이 남는 메인 지도"></div>
+            <p class="dv-cap rv rv-d1">지나온 경로가 궤적으로 남는 메인 지도 — 영상은 PIP로 함께 확인합니다.</p>
+            <div class="dv-pair rv rv-d2">
+                <div>
+                    <div class="dv-shot"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/map_airspace.png" alt="공역 색 구분 표시"></div>
+                    <p class="dv-cap">비행금지구역이 지도 위에 색으로 즉시 구분됩니다.</p>
+                </div>
+                <div>
+                    <div class="dv-shot"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/map_airspace_popup.png" alt="공역 상세 정보"></div>
+                    <p class="dv-cap">길게 누르면 구역 이름과 등급까지 바로 확인됩니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REAL RENDER BAND -->
+    <div class="dv-band rv">
+        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_city.png" alt="">
+        <div class="dv-band-scrim"></div>
+        <div class="dv-band-txt">
+            <span class="dv-eyebrow">Real Render — Not a Mockup</span>
+            <h2>이 페이지의 모든 앱 화면은 합성이 아니라, <br class="br-pc">DRTView가 실제로 그린 화면입니다.</h2>
+        </div>
+    </div>
+
+    <!-- 05 FIELD TOOLS -->
+    <section class="dv-sec" id="dv-05">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">05 — Field Tools</div>
+                <h2 class="dv-title">기능은 현장에서<br>자랐습니다</h2>
+            </div>
+            <div class="dv-cols" style="margin-top:56px;">
+                <div class="dv-stack rv rv-d2">
+                    <div>
+                        <div class="dv-shot"><img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/1b4758697f16e.jpg" alt="반자동 청소 AR 가이드"></div>
+                        <p class="dv-cap">반자동 청소 AR 가이드 — NEXA1 전용</p>
+                    </div>
+                    <div>
+                        <div class="dv-shot"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/update_popup.png" alt="앱 업데이트 안내"></div>
+                        <p class="dv-cap">홈 화면의 새 버전 안내 — 한 번의 터치로 갱신</p>
+                    </div>
+                </div>
+                <div class="dv-rows rv rv-d1">
+                    <div class="dv-row"><b>AR 청소 가이드</b><p>NEXA1의 반자동 청소 경로를 영상 위에 투영해 작업 정밀도를 높입니다.</p></div>
+                    <div class="dv-row"><b>원격 업데이트</b><p>앱은 물론 기체 파라미터·펌웨어까지 인터넷 연결만으로 최신 상태를 유지합니다.</p></div>
+                    <div class="dv-row"><b>통합 기록</b><p>원터치 녹화가 영상과 텔레메트리를 함께 저장해, 비행 후 분석과 증빙 자료가 됩니다.</p></div>
+                    <div class="dv-row"><b>암호화 저장</b><p>기록 데이터는 암호화된 상태로 관리됩니다.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 06 CONTROL DEPTH -->
+    <section class="dv-sec" id="dv-06">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">06 — Control Depth</div>
+                <h2 class="dv-title">간편하게 시작해,<br>끝까지 세밀하게</h2>
+                <p class="dv-desc">현장에서는 비행 성향 프리셋, 충돌 방지 거리, 제한 고도를 몇 번의 터치로 조정합니다. 더 깊이 들어가면 <strong>1,000개가 넘는 PX4 파라미터</strong> 전체가 열립니다. 전용 패치 기술이 변경 사항을 데이터 손실 없이 기체에 반영합니다.</p>
+            </div>
+            <div class="dv-pair rv rv-d1" style="margin-top:0;">
+                <div>
+                    <div class="dv-shot"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/vehicle_easy_setup.png" alt="기체 간편 설정"></div>
+                    <p class="dv-cap">기체 간편 설정 — 프리셋 · 충돌 방지 거리 · 제한 고도</p>
+                </div>
+                <div>
+                    <div class="dv-shot"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/params_list.png" alt="전체 파라미터 목록"></div>
+                    <p class="dv-cap">전체 파라미터 목록 — 그룹 탐색과 검색 지원</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 07 ECOSYSTEM -->
+    <section class="dv-sec" id="dv-07">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">07 — Ecosystem</div>
+                <h2 class="dv-title">DRT 기체에 최적화,<br>표준 장비에 개방</h2>
+            </div>
+            <div class="dv-eco rv rv-d1">
+                <div>
+                    <h5>DRT Native</h5>
+                    <p>NEXA1을 비롯한 자사 기체는 전용 하드웨어와 임무 기능까지 완전 연동됩니다.</p>
+                </div>
+                <div>
+                    <h5>Standard FC</h5>
+                    <p>PX4 계열 표준 FC와 USB·UDP·TCP·Bluetooth로 연결됩니다.</p>
+                </div>
+                <div>
+                    <h5>Android Controller</h5>
+                    <p>MK15·MK32 등 Android 조종기와 태블릿에서 동작합니다.</p>
+                </div>
+            </div>
+            <p class="dv-lang rv rv-d2"><b>한국어 · English · 日本語</b> — 독자 개발 앱이기에, 새 언어는 파트너 요청에 맞춰 빠르게 추가됩니다.</p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="dv-band rv">
+        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_road.png" alt="">
+        <div class="dv-band-scrim"></div>
+        <div class="dv-band-txt">
+            <h2>다음 비행은,<br>DRTView와 함께</h2>
+            <div class="dv-actions" style="margin-top:38px; justify-content:center;">
+                <a class="dv-btn dv-btn-solid" href="https://www.drtdrone.io/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=170704954&t=board">DOWNLOAD</a>
+            </div>
+            <p class="dv-note">DRT 기체 패키지의 조종기에는 기본 설치되어 있습니다.</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="dv-footer">
+        <div class="dv-container">
+            <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/074b45295de6b.png" alt="DRT" style="margin-bottom: 34px;">
+            <p>&copy; 2026 DRT Co., Ltd. All rights reserved.<br>본 페이지의 화면과 설계 정보는 (주)디알티의 지적 재산입니다.</p>
         </div>
     </footer>
 
 </div>
 
 <script>
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-    }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+(function () {
+    var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    document.querySelectorAll('#dv26 .rv').forEach(function (el) { obs.observe(el); });
+})();
 </script>
 
 </body>
