@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRTView Desktop — Windows 지상관제 소프트웨어</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============ DRTView Desktop 소개 — cinematic minimal ============ */
+#dvd26 {
+    --bg: #0A0C10;
+    --ink: #EDF1F6;
+    --dim: #93A0B0;
+    --dim-strong: #C4CDD8;
+    --line: rgba(255,255,255,0.09);
+    --accent: #2E9BFF;
+
+    background: var(--bg) !important;
+    color: var(--ink) !important;
+    font-family: 'Outfit', 'Noto Sans KR', sans-serif !important;
+    line-height: 1.8 !important;
+    word-break: keep-all !important;
+    overflow-x: hidden !important;
+}
+#dvd26 *, #dvd26 *::before, #dvd26 *::after { box-sizing: border-box !important; margin: 0; padding: 0; }
+#dvd26 img { max-width: 100%; }
+#dvd26 a { text-decoration: none !important; }
+
+.dv-container { max-width: 1320px !important; margin: 0 auto !important; padding: 0 56px !important; }
+
+.br-pc { display: inline !important; }
+@media (max-width: 900px) { .br-pc { display: none !important; } }
+
+#dvd26 .rv { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s cubic-bezier(.22,.61,.36,1); }
+#dvd26 .rv.on { opacity: 1; transform: translateY(0); }
+#dvd26 .rv-d1 { transition-delay: .12s; }
+#dvd26 .rv-d2 { transition-delay: .24s; }
+
+/* ============ HERO ============ */
+.dv-hero { position: relative; overflow: hidden; background: radial-gradient(ellipse 90% 60% at 50% -10%, #141B26 0%, var(--bg) 60%) !important; padding-top: 78px !important; }
+.dv-hero-head { text-align: center; }
+.dv-hero-head .dv-logo { height: 48px; margin-bottom: 54px !important; }
+.dv-eyebrow { display: block !important; font-family: 'Outfit', sans-serif; color: var(--accent) !important; font-weight: 700 !important; font-size: .92rem !important; letter-spacing: .3em !important; margin-bottom: 26px !important; text-transform: uppercase; }
+.dv-h1 { font-size: clamp(2.6rem, 5.4vw, 5rem) !important; font-weight: 800 !important; line-height: 1.14 !important; letter-spacing: -0.03em !important; color: var(--ink) !important; margin-bottom: 28px !important; }
+.dv-hero-sub { color: var(--dim-strong) !important; font-size: 1.24rem !important; line-height: 1.85 !important; max-width: 720px; margin: 0 auto 44px auto !important; }
+.dv-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.dv-hero-head .dv-actions { justify-content: center; }
+.dv-btn { display: inline-block !important; padding: 17px 46px !important; border-radius: 10px !important; font-weight: 800 !important; font-size: 1rem !important; letter-spacing: .12em !important; cursor: pointer; transition: .25s ease; }
+.dv-btn-solid { background: var(--accent) !important; color: #fff !important; }
+.dv-btn-solid:hover { background: #55AFFF !important; transform: translateY(-2px); }
+.dv-btn-ghost { border: 1px solid rgba(255,255,255,.34) !important; color: var(--ink) !important; background: rgba(10,12,16,.38) !important; letter-spacing: .04em !important; }
+.dv-btn-ghost:hover { border-color: rgba(255,255,255,.7) !important; }
+.dv-hero-visual { margin-top: 74px !important; }
+
+/* ============ FACT STRIP ============ */
+.dv-strip { border-top: 1px solid var(--line) !important; border-bottom: 1px solid var(--line) !important; background: rgba(255,255,255,.015) !important; }
+.dv-strip-grid { display: grid !important; grid-template-columns: repeat(4, 1fr); }
+.dv-strip-grid > div { padding: 36px 30px !important; border-left: 1px solid var(--line); }
+.dv-strip-grid > div:first-child { border-left: 0; }
+.dv-strip-grid b { display: block !important; font-family: 'Outfit', 'Noto Sans KR', sans-serif; font-size: 1.6rem !important; font-weight: 700 !important; color: var(--ink) !important; line-height: 1.3 !important; margin-bottom: 4px !important; }
+.dv-strip-grid span { color: var(--dim) !important; font-size: .86rem !important; letter-spacing: .1em !important; }
+
+/* ============ SECTIONS ============ */
+#dvd26 .dv-sec { padding: 148px 0 !important; border-top: 1px solid var(--line) !important; background: transparent !important; }
+.dv-index { font-family: 'Outfit', sans-serif; color: var(--accent) !important; font-weight: 700 !important; letter-spacing: .3em !important; font-size: .84rem !important; margin-bottom: 30px !important; text-transform: uppercase; }
+.dv-title { font-size: clamp(2.1rem, 3.8vw, 3.4rem) !important; font-weight: 800 !important; line-height: 1.22 !important; letter-spacing: -0.02em !important; color: var(--ink) !important; margin-bottom: 30px !important; }
+.dv-desc { color: var(--dim) !important; font-size: 1.22rem !important; line-height: 1.9 !important; max-width: 860px; margin-bottom: 60px !important; }
+.dv-desc strong { color: var(--dim-strong) !important; font-weight: 700 !important; }
+
+/* 스크린샷 슬롯 — 촬영본이 들어갈 자리 */
+.dv-shot { border-radius: 14px !important; overflow: hidden !important; border: 1px solid var(--line) !important; background: #000 !important; box-shadow: 0 28px 70px rgba(0,0,0,.5); }
+.dv-shot img { width: 100% !important; display: block !important; }
+.dv-slot { border: 1px dashed rgba(46,155,255,.45) !important; border-radius: 14px !important; background: rgba(46,155,255,.04) !important;
+    aspect-ratio: 16 / 10; display: flex !important; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px !important; gap: 10px; }
+.dv-slot b { font-family: 'Outfit', monospace; color: var(--accent) !important; font-size: .95rem !important; letter-spacing: .08em !important; }
+.dv-slot span { color: var(--dim) !important; font-size: 1rem !important; line-height: 1.65 !important; max-width: 460px; }
+.dv-cap { margin-top: 16px !important; color: var(--dim) !important; font-size: .95rem !important; line-height: 1.6 !important; }
+.dv-cap::before { content: "—  "; color: var(--accent); font-weight: 700; }
+
+.dv-pair { display: grid !important; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 44px !important; }
+.dv-cols { display: grid !important; grid-template-columns: 1fr 1.12fr; gap: 72px; align-items: start; }
+.dv-stack > div + div { margin-top: 36px !important; }
+
+.dv-rows { border-top: 1px solid var(--line) !important; }
+.dv-row { display: grid !important; grid-template-columns: 215px 1fr; gap: 28px; padding: 27px 0 !important; border-bottom: 1px solid var(--line) !important; }
+.dv-row b { color: var(--ink) !important; font-size: 1.1rem !important; font-weight: 700 !important; line-height: 1.6 !important; }
+.dv-row p { color: var(--dim) !important; font-size: 1.08rem !important; line-height: 1.8 !important; }
+
+/* 연결 사양 표 */
+.dv-spec { border-top: 1px solid var(--line) !important; margin-top: 8px !important; }
+.dv-spec > div { display: grid !important; grid-template-columns: 180px 1fr; gap: 28px; padding: 22px 0 !important; border-bottom: 1px solid var(--line) !important; }
+.dv-spec b { color: var(--ink) !important; font-size: 1.05rem !important; font-weight: 700 !important; }
+.dv-spec span { color: var(--dim) !important; font-size: 1.05rem !important; line-height: 1.75 !important; }
+.dv-spec em { font-style: normal; color: var(--dim-strong) !important; font-family: 'Outfit', sans-serif; }
+
+/* 밴드 */
+.dv-band { position: relative; overflow: hidden; background: #0C1017 !important; border-top: 1px solid var(--line) !important; border-bottom: 1px solid var(--line) !important; }
+.dv-band-txt { padding: 130px 28px !important; display: flex !important; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.dv-band-txt h2 { font-size: clamp(1.7rem, 3vw, 2.7rem) !important; font-weight: 800 !important; line-height: 1.4 !important; letter-spacing: -0.015em !important; color: var(--ink) !important; max-width: 900px; }
+.dv-band-txt .dv-note { margin-top: 26px !important; color: var(--dim) !important; font-size: 1.05rem !important; }
+
+/* 3열 */
+.dv-eco { display: grid !important; grid-template-columns: repeat(3, 1fr); margin-top: 64px !important; }
+.dv-eco > div { padding: 10px 40px 10px 30px !important; border-left: 1px solid var(--line); }
+.dv-eco > div:first-child { border-left: 0; padding-left: 0 !important; }
+.dv-eco h5 { font-family: 'Outfit', sans-serif; color: var(--accent) !important; font-size: .95rem !important; font-weight: 700 !important; letter-spacing: .22em !important; margin-bottom: 16px !important; text-transform: uppercase; }
+.dv-eco p { color: var(--dim) !important; font-size: 1.08rem !important; line-height: 1.8 !important; }
+
+.dv-footer { padding: 100px 0 !important; background: #06080B !important; text-align: center; border-top: 1px solid var(--line) !important; }
+.dv-footer p { color: #5A6472 !important; font-size: 1rem !important; max-width: 760px; margin: 0 auto !important; line-height: 1.9 !important; }
+
+@media (max-width: 1000px) {
+    .dv-container { padding: 0 24px !important; }
+    #dvd26 .dv-sec { padding: 92px 0 !important; }
+    .dv-hero { padding-top: 56px !important; }
+    .dv-hero-head .dv-logo { height: 38px; margin-bottom: 36px !important; }
+    .dv-hero-visual { margin-top: 48px !important; }
+    .dv-hero-sub { font-size: 1.06rem !important; }
+    .dv-strip-grid { grid-template-columns: 1fr 1fr; }
+    .dv-strip-grid > div { padding: 26px 22px !important; }
+    .dv-strip-grid > div:nth-child(3) { border-left: 0; }
+    .dv-strip-grid > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .dv-strip-grid b { font-size: 1.3rem !important; }
+    .dv-cols, .dv-pair { grid-template-columns: 1fr; gap: 36px; }
+    .dv-row, .dv-spec > div { grid-template-columns: 1fr; gap: 8px; padding: 22px 0 !important; }
+    .dv-desc { font-size: 1.1rem !important; margin-bottom: 44px !important; }
+    .dv-eco { grid-template-columns: 1fr; margin-top: 44px !important; }
+    .dv-eco > div { border-left: 0; border-top: 1px solid var(--line); padding: 26px 0 !important; }
+    .dv-eco > div:first-child { border-top: 0; padding-top: 0 !important; }
+    .dv-eyebrow { font-size: .76rem !important; letter-spacing: .2em !important; }
+    .dv-band-txt { padding: 80px 20px !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="dvd26">
+
+    <!-- HERO -->
+    <header class="dv-hero">
+        <div class="dv-container dv-hero-head">
+            <img class="dv-logo" src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/2e4159a01e616.png" alt="DRTView">
+            <span class="dv-eyebrow">DRTView Desktop — Windows Ground Station</span>
+            <h1 class="dv-h1">임무를 그리고, 기체를 맞추고,<br class="br-pc"> 비행을 남깁니다</h1>
+            <p class="dv-hero-sub">조종기에서 쓰던 DRTView의 데스크톱판입니다. 현장에서 필요한 조작은 조종기가 맡고, 계획과 정비와 기록처럼 화면이 넓어야 하는 일은 이쪽에서 끝냅니다.</p>
+            <div class="dv-actions">
+                <a class="dv-btn dv-btn-solid" target="_blank" rel="noopener" href="https://www.drtdrone.io/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=170704954&t=board">DOWNLOAD</a>
+                <a class="dv-btn dv-btn-ghost" href="#dvd-01">기능 살펴보기</a>
+            </div>
+        </div>
+        <div class="dv-container dv-hero-visual">
+            <div class="dv-slot" style="aspect-ratio: 16/9;">
+                <b>desktop_hero.png</b>
+                <span>비행 중 전체 화면 — 지도에 궤적이 남고 영상 PIP와 상단 상태바가 함께 보이는 상태. 창 최대화, 1920×1080 이상.</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- FACT STRIP -->
+    <div class="dv-strip">
+        <div class="dv-container dv-strip-grid">
+            <div><b>Windows x64</b><span>MSI 설치 파일 하나</span></div>
+            <div><b>연결 5가지</b><span>UDP · TCP · 시리얼 · 블루투스 · 중계</span></div>
+            <div><b>공역 4종</b><span>비행금지 · 제한 · 관제권 · 주의</span></div>
+            <div><b>한 · 영 · 일</b><span>지원 언어</span></div>
+        </div>
+    </div>
+
+    <!-- 01 MISSION PLANNING -->
+    <section class="dv-sec" id="dvd-01">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">01 — Mission Planning</div>
+                <h2 class="dv-title">점을 찍는 대신,<br>범위를 지정합니다</h2>
+                <p class="dv-desc">웨이포인트를 하나씩 놓는 방식도 그대로 쓸 수 있지만, 넓은 지역을 훑는 임무라면 <strong>영역만 지정하고 간격과 각도를 정하면</strong> 경로가 만들어집니다. 측량용 격자, 도로·송전선 같은 회랑, 건물 외벽을 도는 다층 경로를 각각 지원합니다.</p>
+            </div>
+            <div class="dv-cols" style="margin-top:8px;">
+                <div class="dv-rows rv rv-d1">
+                    <div class="dv-row"><b>격자 측량</b><p>촬영 영역을 그리면 지정한 간격과 각도로 왕복 경로를 채웁니다. 선회 구간 길이와 카메라 촬영 트리거도 함께 설정합니다.</p></div>
+                    <div class="dv-row"><b>회랑 스캔</b><p>도로·하천·송전선처럼 길게 이어지는 대상을 폭만 지정해 따라갑니다.</p></div>
+                    <div class="dv-row"><b>구조물 스캔</b><p>건물이나 구조물 둘레를 고도를 나눠 여러 층으로 돕니다. 벽면과의 거리와 짐벌 각도를 지정합니다.</p></div>
+                    <div class="dv-row"><b>경계와 대피점</b><p>지오펜스로 비행 한계를 두고, 비상 착륙 지점(Rally Point)을 미리 지정합니다.</p></div>
+                    <div class="dv-row"><b>파일로 보관</b><p>.plan 파일로 저장하고 불러옵니다. 지오펜스와 대피점까지 한 파일에 담기며 QGroundControl과 호환됩니다.</p></div>
+                    <div class="dv-row"><b>소요 배터리</b><p>호버·순항 전류와 배터리 용량을 넣어 두면, 계획한 임무에 필요한 용량을 비행 전에 확인합니다.</p></div>
+                </div>
+                <div class="dv-stack rv rv-d2">
+                    <div>
+                        <div class="dv-slot">
+                            <b>plan_survey.png</b>
+                            <span>Plan 모드에서 격자 측량 경로가 생성된 상태. 왼쪽 설정 패널(간격·각도)과 지도의 왕복 경로가 함께 보이게.</span>
+                        </div>
+                        <p class="dv-cap">영역을 그리면 경로는 자동으로 채워집니다.</p>
+                    </div>
+                    <div>
+                        <div class="dv-slot">
+                            <b>plan_fence.png</b>
+                            <span>지오펜스 폴리곤과 Rally Point가 지도에 표시된 상태. 오른쪽 목록 패널 포함.</span>
+                        </div>
+                        <p class="dv-cap">비행 한계와 비상 착륙 지점을 같은 화면에서.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02 MAP -->
+    <section class="dv-sec" id="dvd-02">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">02 — Map</div>
+                <h2 class="dv-title">통신이 없는 현장에서도<br>지도는 열립니다</h2>
+                <p class="dv-desc">한 번 열어 본 위성 지도는 디스크에 남아 다음 비행에서 그대로 뜹니다. 직접 촬영한 정사영상을 올리면 <strong>현장 해상도 그대로 지도가 됩니다.</strong> 온라인 지도와 로컬 지도를 나란히 두고 비교할 수도 있습니다.</p>
+            </div>
+            <div class="dv-slot rv rv-d1" style="aspect-ratio: 16/9;">
+                <b>map_local_split.png</b>
+                <span>로컬맵 분할 보기 — 2분할 또는 4분할로 온라인 위성지도와 GeoTIFF 로컬맵을 나란히 띄운 화면. 레이어 패널이 보이면 더 좋습니다.</span>
+            </div>
+            <p class="dv-cap rv rv-d1">화면을 나눠 온라인 지도와 촬영 지도를 나란히 봅니다.</p>
+            <div class="dv-cols rv rv-d2" style="margin-top:64px;">
+                <div class="dv-rows">
+                    <div class="dv-row"><b>로컬 지도</b><p>GeoTIFF·COG 정사영상을 좌표에 맞춰 지도 위에 겹칩니다. 여러 장을 레이어로 쌓고 켜고 끕니다.</p></div>
+                    <div class="dv-row"><b>분할 보기</b><p>화면을 1·2·4분할로 나눠 서로 다른 지도를 동시에 봅니다. 온라인과 로컬을 반씩 붙여 보는 방식도 지원합니다.</p></div>
+                    <div class="dv-row"><b>타일 캐시</b><p>열어 본 지역은 디스크에 보관됩니다. 사용량 확인과 삭제는 설정에서 합니다.</p></div>
+                    <div class="dv-row"><b>공역 표시</b><p>비행금지·비행제한·관제권·주의공역을 지도에 겹치고, 구역에 들어가면 경고합니다. 인터넷이 없어도 내장 데이터로 표시됩니다.</p></div>
+                </div>
+                <div>
+                    <div class="dv-slot">
+                        <b>map_airspace.png</b>
+                        <span>공역 폴리곤이 색으로 표시된 지도. 구역을 눌러 이름·등급 말풍선이 뜬 상태면 가장 좋습니다.</span>
+                    </div>
+                    <p class="dv-cap">공역은 색으로 구분되고, 눌러서 이름과 등급을 확인합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03 CONNECTION -->
+    <section class="dv-sec" id="dvd-03">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">03 — Connection</div>
+                <h2 class="dv-title">꽂으면 붙고,<br>여러 개를 한꺼번에</h2>
+                <p class="dv-desc">Pixhawk 계열 USB는 꽂는 즉시 인식해 연결합니다. 서로 다른 연결을 <strong>동시에 열어 둘 수 있고</strong>, 받은 MAVLink를 다른 지상국으로 그대로 넘겨줄 수도 있습니다.</p>
+            </div>
+            <div class="dv-cols" style="margin-top:8px;">
+                <div class="dv-spec rv rv-d1">
+                    <div><b>UDP</b><span>기본 <em>14550</em> 포트로 대기. 멀티캐스트 수신 포함.</span></div>
+                    <div><b>TCP</b><span>기본 <em>5760</em> 포트. 끊기면 자동으로 다시 붙도록 설정할 수 있습니다.</span></div>
+                    <div><b>시리얼</b><span><em>9,600 ~ 2,000,000 bps</em>. Pixhawk·SiK 텔레메트리·RTK 수신기를 자동으로 찾습니다.</span></div>
+                    <div><b>블루투스</b><span>Windows 표준 직렬 프로파일로 바로 연결합니다. 가상 COM 포트를 따로 만들 필요가 없습니다.</span></div>
+                    <div><b>중계</b><span>받은 MAVLink를 다른 지상관제 프로그램으로 전달합니다. 한 대의 기체를 두 화면에서 볼 때 씁니다.</span></div>
+                </div>
+                <div class="rv rv-d2">
+                    <div class="dv-slot">
+                        <b>link_connect.png</b>
+                        <span>연결 설정 화면 — 링크 목록에 두 개 이상이 연결된 상태(예: 시리얼 + UDP). 자동 감지된 포트 이름이 보이게.</span>
+                    </div>
+                    <p class="dv-cap">필요한 연결을 필요한 만큼 열어 둡니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04 VIDEO -->
+    <section class="dv-sec" id="dvd-04">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">04 — Video</div>
+                <h2 class="dv-title">받은 화질 그대로<br>남깁니다</h2>
+                <p class="dv-desc">RTSP 스트림을 받거나, 전용 USB 수신기로 기체 영상을 직접 받습니다. 녹화는 <strong>다시 인코딩하지 않고</strong> 받은 스트림을 그대로 파일에 담습니다. 화질이 떨어지지 않고, 녹화 중에도 CPU가 놀지 않습니다.</p>
+            </div>
+            <div class="dv-cols" style="margin-top:8px;">
+                <div class="dv-rows rv rv-d1">
+                    <div class="dv-row"><b>두 가지 수신</b><p>일반 RTSP 스트림과, WFB-ng 방식의 직접 수신을 모두 지원합니다.</p></div>
+                    <div class="dv-row"><b>무손실 녹화</b><p>받은 영상을 재인코딩 없이 MP4로 저장합니다. 시동과 동시에 자동으로 녹화를 시작하도록 둘 수 있습니다.</p></div>
+                    <div class="dv-row"><b>화면 배분</b><p>지도와 영상 중 무엇을 크게 볼지 상황에 맞춰 바꿉니다. 작은 창은 크기를 끌어 조절합니다.</p></div>
+                </div>
+                <div class="rv rv-d2">
+                    <div class="dv-slot">
+                        <b>video_rec.png</b>
+                        <span>영상을 크게 띄우고 녹화 중(REC 경과 시간 표시)인 화면. 지도는 작은 창으로.</span>
+                    </div>
+                    <p class="dv-cap">시동을 걸면 녹화도 함께 시작하도록 둘 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 05 SETUP -->
+    <section class="dv-sec" id="dvd-05">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">05 — Setup &amp; Maintenance</div>
+                <h2 class="dv-title">기체를 맞추는 일도<br>여기서 끝냅니다</h2>
+                <p class="dv-desc">기체를 처음 세울 때와 정비할 때 필요한 절차가 모두 들어 있습니다. 모터가 어느 자리에 붙었는지, 스틱이 어느 채널인지 <strong>화면이 물어보고 순서대로 기록합니다.</strong></p>
+            </div>
+            <div class="dv-cols" style="margin-top:8px;">
+                <div class="dv-rows rv rv-d1">
+                    <div class="dv-row"><b>모터 배치</b><p>모터를 하나씩 돌려 보고 어느 자리인지 화면에서 누르면, 배선 순서가 그대로 정리됩니다.</p></div>
+                    <div class="dv-row"><b>조종기 보정</b><p>스틱을 움직이면 채널을 스스로 찾아 최소·최대값과 기능 배정을 기록합니다.</p></div>
+                    <div class="dv-row"><b>센서 보정</b><p>자이로·가속도·수평·지자계·대기속도와 장착 방향을 순서대로 진행합니다.</p></div>
+                    <div class="dv-row"><b>파라미터</b><p>1,000개가 넘는 설정값을 검색·편집합니다. 저장해 둔 파일과 기체 값을 비교해 <strong>다른 항목만 골라 한 번에 적용</strong>할 수 있고, QGroundControl 형식과 호환됩니다.</p></div>
+                    <div class="dv-row"><b>OSD 편집</b><p>영상에 얹히는 정보의 위치를 격자 위에서 직접 옮겨 배치합니다.</p></div>
+                    <div class="dv-row"><b>콘솔</b><p>비행 컨트롤러 콘솔을 앱 안에서 바로 엽니다.</p></div>
+                </div>
+                <div class="dv-stack rv rv-d2">
+                    <div>
+                        <div class="dv-slot">
+                            <b>setup_actuator.png</b>
+                            <span>모터 배치 마법사 — 기체 도형에 모터 번호가 표시되고 한 개가 선택된 상태.</span>
+                        </div>
+                        <p class="dv-cap">돌려 보고, 눌러서 자리를 정합니다.</p>
+                    </div>
+                    <div>
+                        <div class="dv-slot">
+                            <b>param_diff.png</b>
+                            <span>파라미터 비교 창 — 파일 값과 기체 값이 다른 항목이 나열되고 체크박스로 선택된 상태.</span>
+                        </div>
+                        <p class="dv-cap">달라진 값만 골라 한 번에 적용합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 06 RECORDS -->
+    <section class="dv-sec" id="dvd-06">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">06 — Records</div>
+                <h2 class="dv-title">비행은 두 벌로 남습니다</h2>
+                <p class="dv-desc">기체가 스스로 기록한 비행 로그를 목록에서 골라 내려받고, 지상국 쪽에서는 주고받은 통신을 자동으로 남깁니다. 문제가 생겼을 때 <strong>양쪽을 맞춰 볼 수 있습니다.</strong></p>
+            </div>
+            <div class="dv-cols" style="margin-top:8px;">
+                <div class="dv-rows rv rv-d1">
+                    <div class="dv-row"><b>기체 로그</b><p>기체에 쌓인 비행 로그를 목록으로 확인하고 내려받습니다. 진행률이 표시되고 중간에 멈출 수 있으며, 저장 공간이 부족하면 한 번에 비웁니다.</p></div>
+                    <div class="dv-row"><b>통신 기록</b><p>시동을 걸면 기록이 시작되어 착륙과 함께 파일로 저장됩니다. 따로 누를 것이 없습니다.</p></div>
+                    <div class="dv-row"><b>영상 기록</b><p>녹화한 영상은 문서 폴더 아래에 날짜·시각 이름으로 정리됩니다. 저장 위치는 바꿀 수 있습니다.</p></div>
+                </div>
+                <div class="rv rv-d2">
+                    <div class="dv-slot">
+                        <b>log_download.png</b>
+                        <span>로그 화면 — 비행 로그 목록과 다운로드 진행률이 함께 보이는 상태.</span>
+                    </div>
+                    <p class="dv-cap">기체에 쌓인 로그를 목록에서 골라 내려받습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BAND -->
+    <div class="dv-band rv">
+        <div class="dv-container dv-band-txt">
+            <span class="dv-eyebrow">Same App, Wider Screen</span>
+            <h2>조종기와 같은 화면, 같은 조작.<br class="br-pc">넓은 화면에서만 되는 일이 더해집니다.</h2>
+            <p class="dv-note">DRTView 조종기 버전과 나란히 쓰도록 만들었습니다.</p>
+        </div>
+    </div>
+
+    <!-- 07 INSTALL -->
+    <section class="dv-sec" id="dvd-07" style="border-top:0;">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">07 — Install</div>
+                <h2 class="dv-title">설치는 한 번,<br>이후는 앱이 알아서</h2>
+                <p class="dv-desc">설치 파일 하나를 실행하면 끝납니다. 새 버전이 올라오면 앱이 알려 주고, 내려받은 파일이 온전한지 확인한 뒤 설치하고 다시 켭니다.</p>
+            </div>
+            <div class="dv-eco rv rv-d1">
+                <div>
+                    <h5>Windows x64</h5>
+                    <p>MSI 설치 파일 하나로 설치합니다. 관리자 권한 없이 사용자 계정에 설치됩니다.</p>
+                </div>
+                <div>
+                    <h5>Auto Update</h5>
+                    <p>새 버전을 앱 안에서 내려받고, 파일 검증을 거쳐 설치한 뒤 자동으로 다시 시작합니다.</p>
+                </div>
+                <div>
+                    <h5>Extras</h5>
+                    <p>게임패드로 직접 조종할 수 있고, 터치 노트북에서는 손가락 제스처로 지도를 다룹니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="dv-band rv" style="border-bottom:0;">
+        <div class="dv-container dv-band-txt">
+            <h2>다음 임무는,<br>넓은 화면에서</h2>
+            <div class="dv-actions" style="margin-top:38px; justify-content:center;">
+                <a class="dv-btn dv-btn-solid" target="_blank" rel="noopener" href="https://www.drtdrone.io/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=170704954&t=board">DOWNLOAD</a>
+            </div>
+            <p class="dv-note">Windows 10 이상 · 64비트</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="dv-footer">
+        <div class="dv-container">
+            <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/074b45295de6b.png" alt="DRT" style="margin-bottom: 34px;">
+            <p>&copy; 2026 DRT Co., Ltd. All rights reserved.<br>본 페이지의 화면과 설계 정보는 (주)디알티의 지적 재산입니다.</p>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+(function () {
+    var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    document.querySelectorAll('#dvd26 .rv').forEach(function (el) { obs.observe(el); });
+})();
+</script>
+
+</body>
+</html>
