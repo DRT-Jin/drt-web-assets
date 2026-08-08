@@ -39,26 +39,22 @@
 #dv26 .rv-d2 { transition-delay: .24s; }
 
 /* ============ HERO ============ */
-.dv-hero { position: relative; min-height: 100vh; display: flex !important; flex-direction: column; overflow: hidden; background: var(--bg); }
-.dv-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
-.dv-hero-scrim { position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(10,12,16,.66) 0%, rgba(10,12,16,.28) 36%, rgba(10,12,16,.55) 68%, rgba(9,11,14,.96) 100%); }
-.dv-hero-top { position: relative; padding: 52px 0 0 !important; text-align: center; }
-.dv-hero-top img { height: 46px; }
-.dv-hero-body { position: relative; margin-top: auto !important; width: 100%; padding-bottom: 140px !important; }
+.dv-hero { position: relative; overflow: hidden; background: radial-gradient(ellipse 90% 60% at 50% -10%, #141B26 0%, var(--bg) 60%) !important; padding-top: 78px !important; }
+.dv-hero-head { text-align: center; }
+.dv-hero-head .dv-logo { height: 48px; margin-bottom: 54px !important; }
 .dv-eyebrow { display: block !important; font-family: 'Outfit', sans-serif; color: var(--accent) !important; font-weight: 700 !important; font-size: .92rem !important; letter-spacing: .3em !important; margin-bottom: 26px !important; text-transform: uppercase; }
-.dv-h1 { font-size: clamp(2.6rem, 6vw, 5.3rem) !important; font-weight: 800 !important; line-height: 1.12 !important; letter-spacing: -0.03em !important; color: var(--ink) !important; margin-bottom: 30px !important; }
-.dv-hero-sub { color: rgba(237,241,246,.85) !important; font-size: 1.24rem !important; line-height: 1.85 !important; max-width: 680px; margin-bottom: 46px !important; }
+.dv-h1 { font-size: clamp(2.6rem, 5.4vw, 5rem) !important; font-weight: 800 !important; line-height: 1.14 !important; letter-spacing: -0.03em !important; color: var(--ink) !important; margin-bottom: 28px !important; }
+.dv-hero-sub { color: var(--dim-strong) !important; font-size: 1.24rem !important; line-height: 1.85 !important; max-width: 680px; margin: 0 auto 44px auto !important; }
 .dv-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.dv-hero-head .dv-actions { justify-content: center; }
+/* 히어로 스크린샷 — 크롭 없이 전체 표시 */
+.dv-hero-visual { margin-top: 74px !important; }
+.dv-hero-visual img { width: 100% !important; display: block !important; }
 .dv-btn { display: inline-block !important; padding: 17px 46px !important; border-radius: 10px !important; font-weight: 800 !important; font-size: 1rem !important; letter-spacing: .12em !important; cursor: pointer; transition: .25s ease; }
 .dv-btn-solid { background: var(--accent) !important; color: #fff !important; }
 .dv-btn-solid:hover { background: #55AFFF !important; transform: translateY(-2px); }
 .dv-btn-ghost { border: 1px solid rgba(255,255,255,.34) !important; color: var(--ink) !important; background: rgba(10,12,16,.38) !important; letter-spacing: .04em !important; }
 .dv-btn-ghost:hover { border-color: rgba(255,255,255,.7) !important; }
-.dv-scrollcue { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.dv-scrollcue span { font-size: .7rem; letter-spacing: .34em; color: var(--dim); font-family: 'Outfit', sans-serif; font-weight: 600; }
-.dv-scrollcue i { display: block; width: 1px; height: 52px; background: linear-gradient(180deg, var(--accent), transparent); animation: dvcue 2s ease-in-out infinite; }
-@keyframes dvcue { 0% { transform: scaleY(0); transform-origin: top; } 45% { transform: scaleY(1); transform-origin: top; } 55% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
 /* ============ FACT STRIP ============ */
 .dv-strip { border-top: 1px solid var(--line) !important; border-bottom: 1px solid var(--line) !important; background: rgba(255,255,255,.015) !important; }
@@ -111,8 +107,13 @@
 .dv-eco > div:first-child { border-left: 0; padding-left: 0 !important; }
 .dv-eco h5 { font-family: 'Outfit', sans-serif; color: var(--accent) !important; font-size: .95rem !important; font-weight: 700 !important; letter-spacing: .22em !important; margin-bottom: 16px !important; text-transform: uppercase; }
 .dv-eco p { color: var(--dim) !important; font-size: 1.08rem !important; line-height: 1.8 !important; }
-.dv-lang { margin-top: 64px !important; padding-top: 30px !important; border-top: 1px solid var(--line) !important; color: var(--dim) !important; font-size: 1.08rem !important; }
-.dv-lang b { color: var(--ink) !important; font-weight: 700 !important; }
+/* languages */
+.dv-flags { display: grid !important; grid-template-columns: repeat(3, 1fr); margin-top: 8px !important; }
+.dv-flags > div { padding: 10px 40px 10px 30px !important; border-left: 1px solid var(--line); }
+.dv-flags > div:first-child { border-left: 0; padding-left: 0 !important; }
+.dv-flags img { width: 66px !important; height: 44px !important; object-fit: cover; border-radius: 5px !important; box-shadow: 0 8px 22px rgba(0,0,0,.45); margin-bottom: 20px !important; display: block !important; }
+.dv-flags h4 { font-size: 1.5rem !important; font-weight: 800 !important; color: var(--ink) !important; margin-bottom: 8px !important; }
+.dv-flags p { color: var(--dim) !important; font-size: 1.04rem !important; line-height: 1.75 !important; }
 
 /* footer */
 .dv-footer { padding: 100px 0 !important; background: #06080B !important; text-align: center; border-top: 1px solid var(--line) !important; }
@@ -122,8 +123,13 @@
 @media (max-width: 1000px) {
     .dv-container { padding: 0 24px !important; }
     #dv26 .dv-sec { padding: 92px 0 !important; }
-    .dv-hero-body { padding-bottom: 110px !important; }
+    .dv-hero { padding-top: 56px !important; }
+    .dv-hero-head .dv-logo { height: 38px; margin-bottom: 36px !important; }
+    .dv-hero-visual { margin-top: 48px !important; }
     .dv-hero-sub { font-size: 1.06rem !important; }
+    .dv-flags { grid-template-columns: 1fr; }
+    .dv-flags > div { border-left: 0; border-top: 1px solid var(--line); padding: 26px 0 !important; }
+    .dv-flags > div:first-child { border-top: 0; padding-top: 0 !important; }
     .dv-strip-grid { grid-template-columns: 1fr 1fr; }
     .dv-strip-grid > div { padding: 26px 22px !important; }
     .dv-strip-grid > div:nth-child(3) { border-left: 0; }
@@ -146,21 +152,19 @@
 
     <!-- HERO -->
     <header class="dv-hero">
-        <img class="dv-hero-bg" src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_hero_tower.png" alt="">
-        <div class="dv-hero-scrim"></div>
-        <div class="dv-hero-top">
-            <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/2e4159a01e616.png" alt="DRTView">
-        </div>
-        <div class="dv-container dv-hero-body">
+        <div class="dv-container dv-hero-head">
+            <img class="dv-logo" src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/2e4159a01e616.png" alt="DRTView">
             <span class="dv-eyebrow">DRT Ground Control Station</span>
-            <h1 class="dv-h1">비행의 모든 순간을,<br>한 화면에</h1>
+            <h1 class="dv-h1">비행의 모든 순간을,<br class="br-pc"> 한 화면에</h1>
             <p class="dv-hero-sub">드론 제조사 DRT가 처음부터 새로 설계한 관제 소프트웨어입니다. <br class="br-pc">이륙 전 점검부터 착륙 후 기록까지, 조종사에게 필요한 것만 정확한 자리에 놓입니다.</p>
             <div class="dv-actions">
-                <a class="dv-btn dv-btn-solid" href="https://www.drtdrone.io/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=170704954&t=board">DOWNLOAD</a>
+                <a class="dv-btn dv-btn-solid" target="_blank" rel="noopener" href="https://www.drtdrone.io/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=170704954&t=board">DOWNLOAD</a>
                 <a class="dv-btn dv-btn-ghost" href="#dv-01">기능 살펴보기</a>
             </div>
         </div>
-        <div class="dv-scrollcue"><span>SCROLL</span><i></i></div>
+        <div class="dv-hero-visual">
+            <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_lake.png" alt="DRTView 실시간 비행 화면">
+        </div>
     </header>
 
     <!-- FACT STRIP -->
@@ -203,8 +207,8 @@
                 <h2 class="dv-title">영상 위에는<br>필요한 정보만</h2>
                 <p class="dv-desc">자체 개발 영상 파이프라인이 <strong>고해상도 영상을 지연 없이</strong> 그립니다. 고도·비행 시간·배터리·추력은 화면 가장자리에 정돈되고, 조종사의 시선은 기체에서 떠나지 않습니다. 짐벌과 카메라 조작도 같은 화면에서 이뤄집니다.</p>
             </div>
-            <div class="dv-shot rv rv-d1"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_lake.png" alt="실시간 비행 HUD"></div>
-            <p class="dv-cap rv rv-d2">실시간 HUD — 전방 장애물 거리 리본, 지도 PIP, 비행 데이터가 영상 위에 함께 놓입니다.</p>
+            <div class="dv-shot rv rv-d1"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_road.png" alt="실시간 비행 HUD"></div>
+            <p class="dv-cap rv rv-d2">실시간 HUD — 지도 PIP·자세선·비행 데이터가 영상 위에 정돈됩니다.</p>
         </div>
     </section>
 
@@ -244,7 +248,7 @@
                 <h2 class="dv-title">궤적과 공역이<br>한 지도 위에</h2>
                 <p class="dv-desc">실시간 위치와 지나온 경로가 지도에 그대로 남습니다. 비행금지·관제권 공역은 <strong>색으로 구분</strong>되고, 길게 누르면 구역 이름과 등급이 열립니다. 지도 데이터는 오프라인에서도 유지됩니다.</p>
             </div>
-            <div class="dv-shot crop-l rv rv-d1"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/map_main.png" alt="비행 궤적이 남는 메인 지도"></div>
+            <div class="dv-shot rv rv-d1"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/map_main.png" alt="비행 궤적이 남는 메인 지도"></div>
             <p class="dv-cap rv rv-d1">지나온 경로가 궤적으로 남는 메인 지도 — 영상은 PIP로 함께 확인합니다.</p>
             <div class="dv-pair rv rv-d2">
                 <div>
@@ -261,7 +265,7 @@
 
     <!-- REAL RENDER BAND -->
     <div class="dv-band rv">
-        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_city.png" alt="">
+        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_hero_tower.png" alt="">
         <div class="dv-band-scrim"></div>
         <div class="dv-band-txt">
             <span class="dv-eyebrow">Real Render — Not a Mockup</span>
@@ -278,10 +282,6 @@
             </div>
             <div class="dv-cols" style="margin-top:56px;">
                 <div class="dv-stack rv rv-d2">
-                    <div>
-                        <div class="dv-shot"><img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/1b4758697f16e.jpg" alt="반자동 청소 AR 가이드"></div>
-                        <p class="dv-cap">반자동 청소 AR 가이드 — NEXA1 전용</p>
-                    </div>
                     <div>
                         <div class="dv-shot"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/update_popup.png" alt="앱 업데이트 안내"></div>
                         <p class="dv-cap">홈 화면의 새 버전 안내 — 한 번의 터치로 갱신</p>
@@ -339,18 +339,45 @@
                     <p>MK15·MK32 등 Android 조종기와 태블릿에서 동작합니다.</p>
                 </div>
             </div>
-            <p class="dv-lang rv rv-d2"><b>한국어 · English · 日本語</b> — 독자 개발 앱이기에, 새 언어는 파트너 요청에 맞춰 빠르게 추가됩니다.</p>
+        </div>
+    </section>
+
+    <!-- 08 LANGUAGES -->
+    <section class="dv-sec" id="dv-08">
+        <div class="dv-container">
+            <div class="rv">
+                <div class="dv-index">08 — Languages</div>
+                <h2 class="dv-title">세 개의 언어로,<br>어느 현장에서든</h2>
+                <p class="dv-desc">한국어·영어·일본어를 <strong>완전 지원</strong>합니다. 독자 개발 앱이기에 화면 전체가 각 언어에 맞게 다듬어져 있고, 새 언어는 파트너 요청에 맞춰 빠르게 추가됩니다.</p>
+            </div>
+            <div class="dv-flags rv rv-d1">
+                <div>
+                    <img src="https://flagcdn.com/w160/kr.png" alt="한국">
+                    <h4>한국어</h4>
+                    <p>기본 언어 — 경고·안내 음성까지 현장 용어 그대로.</p>
+                </div>
+                <div>
+                    <img src="https://flagcdn.com/w160/us.png" alt="영어권">
+                    <h4>English</h4>
+                    <p>글로벌 표준 — 해외 운용과 수출 장비에 대응합니다.</p>
+                </div>
+                <div>
+                    <img src="https://flagcdn.com/w160/jp.png" alt="일본">
+                    <h4>日本語</h4>
+                    <p>일본 시장 대응 — 현지 파트너십을 지원합니다.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- CTA -->
     <div class="dv-band rv">
-        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_road.png" alt="">
+        <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_city.png" alt="">
         <div class="dv-band-scrim"></div>
         <div class="dv-band-txt">
             <h2>다음 비행은,<br>DRTView와 함께</h2>
             <div class="dv-actions" style="margin-top:38px; justify-content:center;">
-                <a class="dv-btn dv-btn-solid" href="https://www.drtdrone.io/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=170704954&t=board">DOWNLOAD</a>
+                <a class="dv-btn dv-btn-solid" target="_blank" rel="noopener" href="https://www.drtdrone.io/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=170704954&t=board">DOWNLOAD</a>
             </div>
             <p class="dv-note">DRT 기체 패키지의 조종기에는 기본 설치되어 있습니다.</p>
         </div>
