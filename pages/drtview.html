@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DRTView — DRT Ground Control Station</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap');
 /* ============ DRTView 소개 v4 — cinematic minimal ============ */
 #dv26 {
     --bg: #0A0C10;
@@ -32,11 +32,13 @@
 .br-pc { display: inline !important; }
 @media (max-width: 900px) { .br-pc { display: none !important; } }
 
-/* reveal */
-#dv26 .rv { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s cubic-bezier(.22,.61,.36,1); }
-#dv26 .rv.on { opacity: 1; transform: translateY(0); }
-#dv26 .rv-d1 { transition-delay: .12s; }
-#dv26 .rv-d2 { transition-delay: .24s; }
+/* reveal — 위젯 저장 시 script가 제거되므로 CSS 스크롤 타임라인만 사용, 미지원 브라우저는 항상 표시 */
+@supports (animation-timeline: view()) {
+    #dv26 .rv { animation: dvReveal .9s cubic-bezier(.22,.61,.36,1) both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+    #dv26 .rv-d1 { animation-range: entry 8% entry 48%; }
+    #dv26 .rv-d2 { animation-range: entry 16% entry 56%; }
+}
+@keyframes dvReveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ============ HERO ============ */
 .dv-hero { position: relative; overflow: hidden; background: radial-gradient(ellipse 90% 60% at 50% -10%, #141B26 0%, var(--bg) 60%) !important; padding-top: 78px !important; }
@@ -115,10 +117,6 @@
 .dv-flags h4 { font-size: 1.5rem !important; font-weight: 800 !important; color: var(--ink) !important; margin-bottom: 8px !important; }
 .dv-flags p { color: var(--dim) !important; font-size: 1.04rem !important; line-height: 1.75 !important; }
 
-/* footer */
-.dv-footer { padding: 100px 0 !important; background: #06080B !important; text-align: center; border-top: 1px solid var(--line) !important; }
-.dv-footer p { color: #5A6472 !important; font-size: 1rem !important; max-width: 760px; margin: 0 auto !important; line-height: 1.9 !important; }
-
 /* ============ RESPONSIVE ============ */
 @media (max-width: 1000px) {
     .dv-container { padding: 0 24px !important; }
@@ -156,7 +154,7 @@
             <img class="dv-logo" src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/2e4159a01e616.png" alt="DRTView">
             <span class="dv-eyebrow">DRT Ground Control Station</span>
             <h1 class="dv-h1">비행의 모든 순간을,<br class="br-pc"> 한 화면에</h1>
-            <p class="dv-hero-sub">드론 제조사 DRT가 처음부터 새로 설계한 관제 소프트웨어입니다. <br class="br-pc">이륙 전 점검부터 착륙 후 기록까지, 조종사에게 필요한 것만 정확한 자리에 놓입니다.</p>
+            <p class="dv-hero-sub">드론 제조사 DRT가 처음부터 새로 설계한 관제 소프트웨어입니다. <br class="br-pc">이륙 전 점검부터 착륙 후 기록까지, 조종사에게 필요한 정보만 제자리에 놓았습니다.</p>
             <div class="dv-actions">
                 <a class="dv-btn dv-btn-solid" target="_blank" rel="noopener" href="https://www.drtdrone.io/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=170704954&t=board">DOWNLOAD</a>
                 <a class="dv-btn dv-btn-ghost" href="#dv-01">기능 살펴보기</a>
@@ -170,7 +168,7 @@
     <!-- FACT STRIP -->
     <div class="dv-strip">
         <div class="dv-container dv-strip-grid">
-            <div><b>0.1초</b><span>텔레메트리 동기</span></div>
+            <div><b>초당 5회</b><span>텔레메트리 갱신</span></div>
             <div><b>1,000+</b><span>제어 파라미터</span></div>
             <div><b>한 · 영 · 일</b><span>지원 언어</span></div>
             <div><b>4가지 연결</b><span>USB · UDP · TCP · Bluetooth</span></div>
@@ -183,7 +181,7 @@
             <div class="rv">
                 <div class="dv-index">01 — Smart Launcher</div>
                 <h2 class="dv-title">전원을 켜면,<br>준비가 시작됩니다</h2>
-                <p class="dv-desc">DRTView는 전용 조종기의 <strong>시작 화면</strong>입니다. 기체 연결과 영상 수신, 배터리·위성 상태가 홈 한 화면에 정리되고, 이륙 전 점검을 통과하면 버튼 하나로 비행 화면에 들어갑니다.</p>
+                <p class="dv-desc">DRTView는 전용 조종기의 <strong>시작 화면</strong>입니다. 기체 연결과 영상 수신, 배터리·위성 상태가 홈 한 화면에 정리되고, 이륙 전 점검 결과를 확인한 뒤 버튼 하나로 비행 화면에 들어갑니다.</p>
             </div>
             <div class="dv-shot rv rv-d1"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/home_launcher.png" alt="DRTView 홈 화면"></div>
             <div class="dv-pair rv rv-d2">
@@ -205,7 +203,7 @@
             <div class="rv">
                 <div class="dv-index">02 — Flight HUD &amp; Video</div>
                 <h2 class="dv-title">영상 위에는<br>필요한 정보만</h2>
-                <p class="dv-desc">자체 개발 영상 파이프라인이 <strong>고해상도 영상을 지연 없이</strong> 그립니다. 고도·비행 시간·배터리·추력은 화면 가장자리에 정돈되고, 조종사의 시선은 기체에서 떠나지 않습니다. 짐벌과 카메라 조작도 같은 화면에서 이뤄집니다.</p>
+                <p class="dv-desc">자체 개발 영상 파이프라인이 <strong>고해상도 영상을 낮은 지연으로</strong> 그립니다. 고도·비행 시간·배터리·추력은 화면 가장자리에 정돈되고, 조종사의 시선은 기체에서 떠나지 않습니다. 짐벌과 카메라 조작도 같은 화면에서 이뤄집니다.</p>
             </div>
             <div class="dv-shot rv rv-d1"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/flight_road.png" alt="실시간 비행 HUD"></div>
             <p class="dv-cap rv rv-d2">실시간 HUD — 지도 PIP·자세선·비행 데이터가 영상 위에 정돈됩니다.</p>
@@ -222,8 +220,8 @@
             <div class="dv-cols" style="margin-top:56px;">
                 <div class="dv-rows rv rv-d1">
                     <div class="dv-row"><b>장애물 거리 표시</b><p>기체가 감지한 장애물까지의 거리를 방향별 리본으로 영상 위에 그립니다.</p></div>
-                    <div class="dv-row"><b>경고 팝업</b><p>위험 구역 진입, 기체 이상, 운용 한계 초과를 화면 중앙에 즉시 띄웁니다.</p></div>
-                    <div class="dv-row"><b>음성 안내</b><p>화면을 볼 수 없는 순간에도 중요한 변화를 음성으로 알립니다. 한국어·영어를 지원합니다.</p></div>
+                    <div class="dv-row"><b>경고 팝업</b><p>기체 이상과 운용 한계 초과를 화면 중앙에 즉시 띄웁니다.</p></div>
+                    <div class="dv-row"><b>음성 안내</b><p>화면을 볼 수 없는 순간에도 중요한 변화를 음성으로 알립니다.</p></div>
                     <div class="dv-row"><b>추진 하중 감시</b><p>추력 데이터로 기체 총중량을 실시간 추정하고, 공식 추진표 범위를 넘으면 하강을 권고합니다.</p></div>
                 </div>
                 <div class="dv-stack rv rv-d2">
@@ -246,7 +244,7 @@
             <div class="rv">
                 <div class="dv-index">04 — Map &amp; Airspace</div>
                 <h2 class="dv-title">궤적과 공역이<br>한 지도 위에</h2>
-                <p class="dv-desc">실시간 위치와 지나온 경로가 지도에 그대로 남습니다. 비행금지·관제권 공역은 <strong>색으로 구분</strong>되고, 길게 누르면 구역 이름과 등급이 열립니다. 지도 데이터는 오프라인에서도 유지됩니다.</p>
+                <p class="dv-desc">실시간 위치와 지나온 경로가 지도에 그대로 남습니다. 비행금지·관제권 공역은 <strong>색으로 구분</strong>되어, 지금 나는 하늘이 비행해도 되는 곳인지 지도만 보고 판단할 수 있습니다.</p>
             </div>
             <div class="dv-shot rv rv-d1"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/2026-08/map_main.png" alt="비행 궤적이 남는 메인 지도"></div>
             <p class="dv-cap rv rv-d1">지나온 경로가 궤적으로 남는 메인 지도 — 영상은 PIP로 함께 확인합니다.</p>
@@ -269,7 +267,7 @@
         <div class="dv-band-scrim"></div>
         <div class="dv-band-txt">
             <span class="dv-eyebrow">Real Render — Not a Mockup</span>
-            <h2>이 페이지의 모든 앱 화면은 합성이 아니라, <br class="br-pc">DRTView가 실제로 그린 화면입니다.</h2>
+            <h2>이 페이지의 앱 화면은 모두 합성이 아니라, <br class="br-pc">DRTView가 실제로 그린 그대로입니다.</h2>
         </div>
     </div>
 
@@ -290,8 +288,8 @@
                 <div class="dv-rows rv rv-d1">
                     <div class="dv-row"><b>AR 청소 가이드</b><p>NEXA1의 반자동 청소 경로를 영상 위에 투영해 작업 정밀도를 높입니다.</p></div>
                     <div class="dv-row"><b>원격 업데이트</b><p>앱은 물론 기체 파라미터·펌웨어까지 인터넷 연결만으로 최신 상태를 유지합니다.</p></div>
-                    <div class="dv-row"><b>통합 기록</b><p>원터치 녹화가 영상과 텔레메트리를 함께 저장해, 비행 후 분석과 증빙 자료가 됩니다.</p></div>
-                    <div class="dv-row"><b>암호화 저장</b><p>기록 데이터는 암호화된 상태로 관리됩니다.</p></div>
+                    <div class="dv-row"><b>원터치 녹화</b><p>수신 영상을 재인코딩 없이 원본 화질 그대로 저장하고, 저장한 영상은 조종기에서 바로 다시 확인합니다.</p></div>
+                    <div class="dv-row"><b>비행 로그</b><p>기체에 기록된 비행 로그를 조종기로 내려받아, 비행 분석과 정비 판단의 근거로 씁니다.</p></div>
                 </div>
             </div>
         </div>
@@ -303,7 +301,7 @@
             <div class="rv">
                 <div class="dv-index">06 — Control Depth</div>
                 <h2 class="dv-title">간편하게 시작해,<br>끝까지 세밀하게</h2>
-                <p class="dv-desc">현장에서는 비행 성향 프리셋, 충돌 방지 거리, 제한 고도를 몇 번의 터치로 조정합니다. 더 깊이 들어가면 <strong>1,000개가 넘는 PX4 파라미터</strong> 전체가 열립니다. 전용 패치 기술이 변경 사항을 데이터 손실 없이 기체에 반영합니다.</p>
+                <p class="dv-desc">현장에서는 비행 성향 프리셋, 충돌 방지 거리, 제한 고도를 몇 번의 터치로 조정합니다. 더 깊이 들어가면 <strong>1,000개가 넘는 PX4 파라미터</strong> 전체가 열립니다. 변경한 값은 왜곡 없이 그대로 기체에 기록됩니다.</p>
             </div>
             <div class="dv-pair rv rv-d1" style="margin-top:0;">
                 <div>
@@ -383,24 +381,7 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="dv-footer">
-        <div class="dv-container">
-            <img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/074b45295de6b.png" alt="DRT" style="margin-bottom: 34px;">
-            <p>&copy; 2026 DRT Co., Ltd. All rights reserved.<br>본 페이지의 화면과 설계 정보는 (주)디알티의 지적 재산입니다.</p>
-        </div>
-    </footer>
-
 </div>
-
-<script>
-(function () {
-    var obs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-    document.querySelectorAll('#dv26 .rv').forEach(function (el) { obs.observe(el); });
-})();
-</script>
 
 </body>
 </html>
