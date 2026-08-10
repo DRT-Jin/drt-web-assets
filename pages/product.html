@@ -1,0 +1,561 @@
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+    :root, #dp-page {
+        --dp-accent: #234177;
+        --dp-blue: #3b82f6;
+        --dp-dark: #0B1120;
+        --dp-surface: #111827;
+        --dp-gray: #64748B;
+        --dp-border: #E2E8F0;
+        --dp-off-white: #F5F7FA;
+    }
+
+    #dp-page { font-size: 16px !important; font-family: 'Inter', 'Noto Sans KR', sans-serif !important; line-height: 1.7 !important; color: #1E293B !important; word-break: keep-all !important; overflow-wrap: break-word !important; margin: 0 !important; padding: 0 !important; background: #fff !important; overflow-x: hidden !important; }
+    #dp-page *, #dp-page *::before, #dp-page *::after { box-sizing: border-box !important; }
+
+    #dp-page .dp-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    #dp-page .dp-reveal.active { opacity: 1 !important; transform: translateY(0) !important; }
+    #dp-page .dp-d1 { transition-delay: 0.08s; }
+    #dp-page .dp-d2 { transition-delay: 0.16s; }
+    #dp-page .dp-d3 { transition-delay: 0.24s; }
+
+    /* ============ HEADER ============ */
+    #dp-page .dp-header {
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        padding: 100px 50px 60px !important;
+        text-align: center !important;
+    }
+
+    #dp-page .dp-header-tag {
+        font-size: 0.75rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.3em !important;
+        text-transform: uppercase !important;
+        color: var(--dp-blue) !important;
+        margin-bottom: 18px !important;
+        display: block !important;
+    }
+
+    #dp-page .dp-header h1 {
+        font-family: 'Outfit', sans-serif !important;
+        font-size: clamp(2rem, 4vw, 3rem) !important;
+        font-weight: 900 !important;
+        color: var(--dp-accent) !important;
+        letter-spacing: -0.03em !important;
+        margin-bottom: 14px !important;
+    }
+
+    #dp-page .dp-header-desc {
+        font-size: 1rem !important;
+        color: var(--dp-gray) !important;
+        max-width: 480px !important;
+        margin: 0 auto !important;
+    }
+
+    /* ============ SECTION LABEL ============ */
+    #dp-page .dp-section-label {
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        padding: 0 50px 24px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 16px !important;
+    }
+
+    #dp-page .dp-section-label span {
+        font-size: 0.72rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.25em !important;
+        text-transform: uppercase !important;
+        white-space: nowrap !important;
+    }
+
+    #dp-page .dp-section-label::after {
+        content: '' !important;
+        flex: 1 !important;
+        height: 1px !important;
+    }
+
+    /* 기체 라벨 */
+    #dp-page .dp-label-drone span { color: var(--dp-accent) !important; }
+    #dp-page .dp-label-drone::after { background: var(--dp-border) !important; }
+
+    /* 소프트웨어 라벨 — 기체 라벨과 같은 흰 배경 리듬, 색만 블루 */
+    #dp-page .dp-label-sw span { color: var(--dp-blue) !important; }
+    #dp-page .dp-label-sw::after { background: var(--dp-border) !important; }
+
+    /* ============ DRONE SECTION — 화이트 ============ */
+    #dp-page .dp-drone-section {
+        background: #fff !important;
+        padding-bottom: 80px !important;
+    }
+
+    #dp-page .dp-drone-grid {
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        padding: 0 50px !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 드론 카드 */
+    #dp-page .dp-drone-card {
+        position: relative !important;
+        border-radius: 16px !important;
+        overflow: hidden !important;
+        min-height: 360px !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        text-decoration: none !important;
+        color: #fff !important;
+        transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+        border: 1px solid var(--dp-border) !important;
+    }
+
+    #dp-page .dp-drone-card:hover {
+        transform: translateY(-6px) !important;
+        box-shadow: 0 24px 48px rgba(35, 65, 119, 0.12) !important;
+        border-color: var(--dp-blue) !important;
+    }
+
+    #dp-page .dp-drone-card.dp-main {
+        grid-column: 1 / -1 !important;
+        min-height: 440px !important;
+    }
+
+    /* 배경 */
+    #dp-page .dp-card-bg {
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 1 !important;
+    }
+
+    #dp-page .dp-card-bg img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        transition: transform 1s ease !important;
+    }
+
+    #dp-page .dp-drone-card:hover .dp-card-bg img { transform: scale(1.05) !important; }
+
+    #dp-page .dp-card-bg::after {
+        content: '' !important;
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 2 !important;
+        background: linear-gradient(0deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.05) 100%) !important;
+    }
+
+    /* 카드 텍스트 */
+    #dp-page .dp-card-info {
+        position: relative !important;
+        z-index: 5 !important;
+        padding: 32px !important;
+        width: 100% !important;
+    }
+
+    #dp-page .dp-main .dp-card-info {
+        padding: 44px !important;
+        max-width: 650px !important;
+    }
+
+    #dp-page .dp-card-badge {
+        display: inline-block !important;
+        padding: 4px 11px !important;
+        border-radius: 5px !important;
+        font-size: 0.62rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.12em !important;
+        text-transform: uppercase !important;
+        margin-bottom: 12px !important;
+        color: #fff !important;
+    }
+
+    #dp-page .dp-bg-blue { background: var(--dp-blue) !important; }
+    #dp-page .dp-bg-green { background: rgba(76, 175, 80, 0.85) !important; }
+    #dp-page .dp-bg-amber { background: rgba(245, 158, 11, 0.85) !important; }
+
+    #dp-page .dp-card-cat {
+        font-size: 0.68rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.16em !important;
+        text-transform: uppercase !important;
+        color: rgba(255,255,255,0.45) !important;
+        margin-bottom: 5px !important;
+    }
+
+    #dp-page .dp-card-title {
+        font-family: 'Outfit', sans-serif !important;
+        font-size: 1.7rem !important;
+        font-weight: 900 !important;
+        letter-spacing: -0.03em !important;
+        margin-bottom: 8px !important;
+        line-height: 1.1 !important;
+    }
+
+    #dp-page .dp-main .dp-card-title {
+        font-size: 2.5rem !important;
+        margin-bottom: 12px !important;
+    }
+
+    #dp-page .dp-card-desc {
+        font-size: 0.88rem !important;
+        color: rgba(255,255,255,0.55) !important;
+        line-height: 1.6 !important;
+        margin-bottom: 14px !important;
+    }
+
+    #dp-page .dp-main .dp-card-desc { font-size: 0.98rem !important; }
+
+    #dp-page .dp-card-chips {
+        display: flex !important;
+        gap: 7px !important;
+        flex-wrap: wrap !important;
+        margin-bottom: 14px !important;
+    }
+
+    #dp-page .dp-card-chip {
+        padding: 3px 10px !important;
+        background: rgba(255,255,255,0.1) !important;
+        border: 1px solid rgba(255,255,255,0.12) !important;
+        border-radius: 5px !important;
+        font-size: 0.7rem !important;
+        font-weight: 700 !important;
+        color: rgba(255,255,255,0.7) !important;
+    }
+
+    #dp-page .dp-card-cta {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        font-size: 0.8rem !important;
+        font-weight: 700 !important;
+        color: var(--dp-blue) !important;
+        transition: gap 0.3s ease !important;
+    }
+
+    #dp-page .dp-drone-card:hover .dp-card-cta { gap: 12px !important; }
+
+    /* ============ SOFTWARE SECTION — 흰 배경 위 다크 카드 ============ */
+    /* 다크는 섹션 배경이 아니라 카드 표면이 담당 — 페이지는 한 장으로 이어진다 */
+    #dp-page .dp-sw-section {
+        background: #fff !important;
+        padding: 0 0 100px !important;
+    }
+
+    #dp-page .dp-sw-wrap {
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        padding: 0 50px !important;
+    }
+
+    #dp-page .dp-sw-card {
+        display: grid !important;
+        grid-template-columns: 1.3fr 1fr !important;
+        border-radius: 16px !important;
+        overflow: hidden !important;
+        border: 1px solid var(--dp-border) !important;
+        text-decoration: none !important;
+        color: #fff !important;
+        background: var(--dp-surface) !important;
+        transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+
+    #dp-page .dp-sw-card + .dp-sw-card { margin-top: 20px !important; }
+
+    #dp-page .dp-sw-card:hover {
+        transform: translateY(-6px) !important;
+        border-color: var(--dp-blue) !important;
+        box-shadow: 0 24px 48px rgba(35, 65, 119, 0.12) !important;
+    }
+
+    #dp-page .dp-sw-img {
+        position: relative !important;
+        overflow: hidden !important;
+        min-height: 360px !important;
+        background: #000 !important;
+    }
+
+    #dp-page .dp-sw-img img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        transition: transform 0.8s ease !important;
+    }
+
+    #dp-page .dp-sw-card:hover .dp-sw-img img { transform: scale(1.04) !important; }
+
+    #dp-page .dp-sw-content {
+        padding: 44px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        background: var(--dp-surface) !important;
+    }
+
+    #dp-page .dp-sw-badge {
+        display: inline-block !important;
+        padding: 4px 12px !important;
+        background: rgba(139, 92, 246, 0.85) !important;
+        border-radius: 5px !important;
+        font-size: 0.62rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.12em !important;
+        text-transform: uppercase !important;
+        color: #fff !important;
+        margin-bottom: 16px !important;
+        align-self: flex-start !important;
+    }
+
+    #dp-page .dp-sw-cat {
+        font-size: 0.72rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.16em !important;
+        text-transform: uppercase !important;
+        color: var(--dp-blue) !important;
+        margin-bottom: 8px !important;
+    }
+
+    #dp-page .dp-sw-title {
+        font-family: 'Outfit', sans-serif !important;
+        font-size: 2.2rem !important;
+        font-weight: 900 !important;
+        letter-spacing: -0.03em !important;
+        margin-bottom: 14px !important;
+        color: #fff !important;
+    }
+
+    #dp-page .dp-sw-desc {
+        font-size: 0.95rem !important;
+        color: rgba(255,255,255,0.45) !important;
+        line-height: 1.7 !important;
+        margin-bottom: 20px !important;
+    }
+
+    #dp-page .dp-sw-chips {
+        display: flex !important;
+        gap: 8px !important;
+        flex-wrap: wrap !important;
+        margin-bottom: 20px !important;
+    }
+
+    #dp-page .dp-sw-chip {
+        padding: 4px 12px !important;
+        background: rgba(255,255,255,0.06) !important;
+        border: 1px solid rgba(255,255,255,0.08) !important;
+        border-radius: 6px !important;
+        font-size: 0.75rem !important;
+        font-weight: 700 !important;
+        color: rgba(255,255,255,0.6) !important;
+    }
+
+    #dp-page .dp-sw-cta {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        font-size: 0.82rem !important;
+        font-weight: 700 !important;
+        color: var(--dp-blue) !important;
+        transition: gap 0.3s ease !important;
+    }
+
+    #dp-page .dp-sw-card:hover .dp-sw-cta { gap: 12px !important; }
+
+    /* ============ COMING SOON 카드 (DRTView Windows) ============ */
+    #dp-page .dp-sw-card.dp-sw-soon { cursor: default !important; }
+
+    #dp-page .dp-sw-card.dp-sw-soon:hover {
+        transform: none !important;
+        border-color: var(--dp-border) !important;
+        box-shadow: none !important;
+    }
+
+    #dp-page .dp-sw-img-soon {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: linear-gradient(135deg, #131C2E 0%, var(--dp-dark) 70%) !important;
+    }
+
+    #dp-page .dp-soon-mark {
+        font-family: 'Outfit', sans-serif !important;
+        font-size: 0.82rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.34em !important;
+        text-transform: uppercase !important;
+        color: rgba(255,255,255,0.3) !important;
+        border: 1px solid rgba(255,255,255,0.14) !important;
+        border-radius: 999px !important;
+        padding: 10px 26px !important;
+    }
+
+    #dp-page .dp-sw-badge-soon {
+        background: rgba(255,255,255,0.12) !important;
+        color: rgba(255,255,255,0.75) !important;
+    }
+
+    #dp-page .dp-sw-soon .dp-sw-title { color: rgba(255,255,255,0.85) !important; }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 1024px) {
+        #dp-page .dp-header { padding: 80px 30px 50px !important; }
+        #dp-page .dp-drone-grid { padding: 0 30px !important; grid-template-columns: 1fr !important; }
+        #dp-page .dp-drone-card.dp-main { min-height: 380px !important; }
+        #dp-page .dp-main .dp-card-title { font-size: 2rem !important; }
+        #dp-page .dp-section-label { padding: 0 30px 24px !important; }
+        #dp-page .dp-sw-wrap { padding: 0 30px !important; }
+        #dp-page .dp-sw-card { grid-template-columns: 1fr !important; }
+        #dp-page .dp-sw-img { min-height: 260px !important; }
+        #dp-page .dp-sw-img-soon { min-height: 200px !important; }
+        #dp-page .dp-sw-title { font-size: 1.8rem !important; }
+    }
+
+    @media (max-width: 600px) {
+        #dp-page .dp-header { padding: 60px 20px 40px !important; }
+        #dp-page .dp-header h1 { font-size: 1.8rem !important; }
+        #dp-page .dp-drone-grid { padding: 0 20px !important; gap: 14px !important; }
+        #dp-page .dp-drone-card { min-height: 300px !important; }
+        #dp-page .dp-drone-card.dp-main { min-height: 340px !important; }
+        #dp-page .dp-card-info { padding: 24px !important; }
+        #dp-page .dp-main .dp-card-info { padding: 24px !important; }
+        #dp-page .dp-main .dp-card-title { font-size: 1.7rem !important; }
+        #dp-page .dp-card-title { font-size: 1.4rem !important; }
+        #dp-page .dp-section-label { padding: 0 20px 20px !important; }
+        #dp-page .dp-sw-wrap { padding: 0 20px !important; }
+        #dp-page .dp-sw-content { padding: 28px !important; }
+    }
+</style>
+
+<div id="dp-page">
+
+    <!-- HEADER -->
+    <div class="dp-header dp-reveal active">
+        <span class="dp-header-tag">DRT Product Lineup</span>
+        <h1>Beyond, Risk</h1>
+        <p class="dp-header-desc">위험 너머의 가능성을 현실로 만드는 DRT의 무인 솔루션</p>
+    </div>
+
+    <!-- ============ DRONE SECTION — 화이트 배경 ============ -->
+    <section class="dp-drone-section">
+
+        <div class="dp-section-label dp-label-drone dp-reveal">
+            <span>Drone Lineup</span>
+        </div>
+
+        <div class="dp-drone-grid">
+            <!-- NEXA1 -->
+            <a href="https://www.drtdrone.io/NEXA1" class="dp-drone-card dp-main dp-reveal dp-d1">
+                <div class="dp-card-bg"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/nexa1/autosweep-1.jpg" alt="DRT NEXA1"></div>
+                <div class="dp-card-info">
+                    <span class="dp-card-badge dp-bg-blue">Flagship</span>
+                    <div class="dp-card-cat">Cleaning Drone</div>
+                    <h2 class="dp-card-title">DRT NEXA1</h2>
+                    <p class="dp-card-desc">건물 외벽부터 태양광 패널까지, 독자적 기술력으로 불가능했던 청소를 가능하게 만드는 올인원 클리닝 드론.</p>
+                    <div class="dp-card-chips">
+                        <span class="dp-card-chip">725 m²/h</span>
+                        <span class="dp-card-chip">IP65 방수</span>
+                        <span class="dp-card-chip">5개 센서</span>
+                        <span class="dp-card-chip">Tether</span>
+                    </div>
+                    <div class="dp-card-cta">자세히 보기 <span>→</span></div>
+                </div>
+            </a>
+
+            <!-- DRT-Q -->
+            <a href="https://www.drtdrone.io/DRT_Q" class="dp-drone-card dp-reveal dp-d2">
+                <div class="dp-card-bg"><img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drt-q/hero.png" alt="DRT-Q"></div>
+                <div class="dp-card-info">
+                    <span class="dp-card-badge dp-bg-green">Recon</span>
+                    <div class="dp-card-cat">Compact Recon Drone</div>
+                    <h2 class="dp-card-title">DRT-Q</h2>
+                    <p class="dp-card-desc">실내외 관계없이 정밀한 호버링이 가능한 소형 정찰 드론. AR 고글 FPV, 암호화 영상 전송.</p>
+                    <div class="dp-card-chips">
+                        <span class="dp-card-chip">AR 고글 FPV</span>
+                        <span class="dp-card-chip">영상 암호화</span>
+                        <span class="dp-card-chip">최대 20분</span>
+                    </div>
+                    <div class="dp-card-cta">자세히 보기 <span>→</span></div>
+                </div>
+            </a>
+
+            <!-- DRT-T -->
+            <a href="https://www.drtdrone.io/detail/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=169345936&t=board" class="dp-drone-card dp-reveal dp-d3">
+                <div class="dp-card-bg"><img src="https://cdn.imweb.me/upload/S202410091d710fdfb6029/4e4a33669ebdc.jpg" alt="DRT-T"></div>
+                <div class="dp-card-info">
+                    <span class="dp-card-badge dp-bg-amber">Multi-Mission</span>
+                    <div class="dp-card-cat">Multi-Mission Drone</div>
+                    <h2 class="dp-card-title">DRT-T</h2>
+                    <p class="dp-card-desc">전방향 통신 암호화로 하이재킹이 불가능한 다목적 임무 수행형 드론. 물품 투하, 자동 경로 비행.</p>
+                    <div class="dp-card-chips">
+                        <span class="dp-card-chip">1축 짐벌</span>
+                        <span class="dp-card-chip">통신 암호화</span>
+                        <span class="dp-card-chip">최대 30분</span>
+                    </div>
+                    <div class="dp-card-cta">자세히 보기 <span>→</span></div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ============ SOFTWARE SECTION — 흰 배경 위 다크 카드 ============ -->
+    <section class="dp-sw-section">
+        <div class="dp-sw-wrap">
+
+            <div class="dp-section-label dp-label-sw dp-reveal">
+                <span>Software</span>
+            </div>
+
+            <a href="https://www.drtdrone.io/drtview" class="dp-sw-card dp-reveal dp-d1">
+                <div class="dp-sw-img">
+                    <img src="https://raw.githubusercontent.com/DRT-Jin/drt-web-assets/main/drtview/main.png" alt="DRTView">
+                </div>
+                <div class="dp-sw-content">
+                    <span class="dp-sw-badge">GCS</span>
+                    <div class="dp-sw-cat">Ground Control Station</div>
+                    <h2 class="dp-sw-title">DRTView Android</h2>
+                    <p class="dp-sw-desc">DRT 기체의 잠재력을 100% 끌어내는 자체 개발 지상관제시스템. 직관적인 HUD, 실시간 영상, 지능형 안전 시스템.</p>
+                    <div class="dp-sw-chips">
+                        <span class="dp-sw-chip">자체 개발</span>
+                        <span class="dp-sw-chip">실시간 HUD</span>
+                        <span class="dp-sw-chip">TTS 음성</span>
+                        <span class="dp-sw-chip">다국어</span>
+                    </div>
+                    <div class="dp-sw-cta">자세히 보기 <span>→</span></div>
+                </div>
+            </a>
+
+            <!-- DRTView Windows — Coming Soon (클릭 무반응) -->
+            <div class="dp-sw-card dp-sw-soon dp-reveal dp-d2">
+                <div class="dp-sw-img dp-sw-img-soon">
+                    <span class="dp-soon-mark">Coming Soon</span>
+                </div>
+                <div class="dp-sw-content">
+                    <span class="dp-sw-badge dp-sw-badge-soon">Coming Soon</span>
+                    <div class="dp-sw-cat">Ground Control Station</div>
+                    <h2 class="dp-sw-title">DRTView Windows</h2>
+                    <p class="dp-sw-desc">현장의 Android 경험을 데스크톱으로 확장한 Windows 관제 소프트웨어. 대형 화면 기반의 미션 플래닝과 정밀 운용 도구를 준비하고 있습니다.</p>
+                    <div class="dp-sw-chips">
+                        <span class="dp-sw-chip">미션 플래닝</span>
+                        <span class="dp-sw-chip">로컬 맵</span>
+                        <span class="dp-sw-chip">분할 뷰</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    document.documentElement.style.setProperty('font-size', '16px', 'important');
+    var dpObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.dp-reveal').forEach(function(el) { dpObs.observe(el); });
+</script>
